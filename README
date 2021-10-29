@@ -1,0 +1,3 @@
+This is a cleaned up version of PowerUpSQL. 
+
+In short, all the somewhat threatening sounding features for proof of concept exploitation has been removed, leaving only the configuration checks that I believe the majority would benefit from. 
